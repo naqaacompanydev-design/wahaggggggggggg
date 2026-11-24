@@ -16,10 +16,10 @@ for (const f of ['services.mjs', 'faq.mjs', 'legal.mjs', 'build.mjs']) run(f);
 const dist = path.join(root, 'dist');
 fs.rmSync(dist, { recursive: true, force: true });
 const SKIP = new Set(['dist', 'pages', 'tools', 'shots', '.taste-skill', '.claude', '.git', 'node_modules',
-  'README.md', 'vercel.json', '.gitignore', 'package.json', 'credits.json']);
+  'README.md', 'vercel.json', '.gitignore', 'package.json', 'credits.json', 'deliver']);
 const copy = (from, to) => {
   for (const d of fs.readdirSync(from, { withFileTypes: true })) {
-    if (SKIP.has(d.name)) continue;
+    if (SKIP.has(d.name) || d.name.endsWith('.zip')) continue;
     const a = path.join(from, d.name), b = path.join(to, d.name);
     if (d.isDirectory()) { fs.mkdirSync(b, { recursive: true }); copy(a, b); }
     else fs.copyFileSync(a, b);

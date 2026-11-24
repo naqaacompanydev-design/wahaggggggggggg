@@ -1,0 +1,6 @@
+احذف الملفات دي من المستودع على GitHub (الصورة القديمة ما بقتش مستخدمة):
+
+assets/img/photo-f201267167.webp
+assets/img/photo-f201267167-960.webp
+assets/img/photo-f201267167-500.webp
+assets/img/credits.json
