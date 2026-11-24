@@ -1,8 +1,5 @@
-تحديث هيرو الصفحة الرئيسية ولوجو النيف بار
-
-ارفع الملفات دي فوق القديمة في نفس أماكنها في GitHub (Replace):
+Upload these 3 files over the old ones, same folders (Replace):
   index.html
   assets/site.css
   tools/build.mjs
-
-Vercel هيبني الموقع لوحده بعد الرفع، فباقي الصفحات هتتحدث تلقائياً.
+Vercel rebuilds the rest automatically.
