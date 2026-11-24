@@ -69,7 +69,7 @@ ${j(ld)}
           <a class="btn btn--wa" href="${wa}"><svg class="ico"><use href="#i-wa"/></svg>احجز عبر واتساب</a>
           <a class="btn btn--ghost" href="tel:0550771338"><svg class="ico"><use href="#i-phone"/></svg>اتصل: <span dir="ltr">0550771338</span></a>
         </div>
-        <div class="o-pay">قسّط فاتورتك مع<img src="/assets/old/tabby.png" alt="تابي"><img src="/assets/old/tamara.png" alt="تمارا"></div>
+        <div class="o-pay">قسّط فاتورتك مع<img src="/assets/img/tabby.webp" width="288" height="88" alt="تابي"><img src="/assets/img/tamara.webp" width="288" height="88" alt="تمارا"></div>
       </div>
     </div>
   </section>
