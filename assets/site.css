@@ -31,8 +31,9 @@ ul{list-style:none}
 
 /* nav */
 .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
-.nav__bar{display:flex;align-items:center;justify-content:space-between;height:116px;gap:20px}
-.nav__logo img{height:100px;width:auto}
+.nav__bar{display:flex;align-items:center;justify-content:space-between;padding-block:8px;gap:20px}
+.nav__logo{display:block;line-height:0}
+.nav__logo img{height:75px;width:auto}
 .nav__links{display:flex;gap:2px}
 .nav__item{position:relative}
 .nav__link{display:inline-flex;align-items:center;gap:4px;padding:8px 12px;border-radius:999px;font-weight:600;font-size:15px;color:var(--navy);transition:background .2s,color .2s;background:none;border:0;font-family:inherit;cursor:pointer;white-space:nowrap}
