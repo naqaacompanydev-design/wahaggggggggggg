@@ -267,3 +267,17 @@ body:has(.calc-page) .mbar{display:none}
   .c-bar__prog i{display:block;height:100%;width:calc(25% + 75% * var(--p));background:linear-gradient(to left,#2C70A8,#96CC8A);transition:width .4s ease}
   .c-bar__step{display:block;font-size:11.5px;font-weight:700;color:var(--muted);margin-bottom:4px;text-align:center}
 }
+
+/* date step: keep the day strip inside the screen */
+.c-grid>*{min-width:0}
+.days{scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.day{scroll-snap-align:start}
+@media (max-width:900px){
+  .days{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;overflow:visible;padding:0}
+  .day{min-width:0;padding:8px 2px;border-radius:12px}
+  .day b{font-size:12.5px;white-space:nowrap}
+  .day span{font-size:11.5px;white-space:nowrap}
+  .periods{gap:8px}
+  .period{grid-template-columns:auto;justify-items:center;text-align:center;padding:12px 8px}
+  .period .ico{grid-row:auto}
+}
