@@ -273,8 +273,8 @@ html{scrollbar-color:#B8C6DA var(--surface)}
 @media (max-width:900px){
   body{font-size:16px;padding-bottom:72px}
   .topbar__hours,.topbar__mail{display:none!important}
-  .nav__bar{height:78px}
-  .nav__logo img{height:60px}
+  .nav__bar{height:64px}
+  .nav__logo img{height:40px}
   .nav__actions .btn{display:none}
   .hero{min-height:0;padding-block:28px 40px}
   .hero__grid{grid-template-columns:1fr;gap:28px}
