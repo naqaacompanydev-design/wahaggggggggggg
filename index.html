@@ -23,7 +23,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"HouseCleaningService","name":"وهج لخدمات التنظيف","url":"https://www.wahjclean.sa/","telephone":"+966550771338","email":"info@wahjclean.sa","areaServed":{"@type":"City","name":"الرياض"},"address":{"@type":"PostalAddress","addressLocality":"الرياض","addressCountry":"SA"},"paymentAccepted":"Tabby, Tamara"}
 </script>
-<link rel="stylesheet" href="/assets/site.css?v=mwu3lg6r">
+<link rel="stylesheet" href="/assets/site.css?v=mwu3yg68">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -246,6 +246,100 @@
       </div>
     </div>
   </section>
+
+  <section class="section rm" id="areas" aria-labelledby="rm-h">
+    <div class="wrap rm__grid">
+      <div class="rm__text">
+        <h2 id="rm-h">نخدم كل أحياء الرياض</h2>
+        <p class="rm__lead">شمال الرياض وجنوبها وشرقها وغربها ووسطها. اكتب اسم حيّك واحجز على واتساب مباشرة.</p>
+        <form class="rm__search" id="rm-form" role="search" autocomplete="off">
+          <label class="sr-only" for="rm-q">اسم الحي</label>
+          <svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>
+          <input id="rm-q" type="search" list="rm-list" placeholder="اكتب حيّك، مثال: الملقا" enterkeyhint="search">
+          <button type="submit" class="btn btn--primary">تحقّق</button>
+          <datalist id="rm-list"></datalist>
+        </form>
+        <div class="rm__result" id="rm-result" aria-live="polite" hidden></div>
+        <div class="rm__tabs" role="tablist" aria-label="مناطق الرياض">
+          <button type="button" role="tab" data-z="n" aria-selected="true">الشمال</button>
+          <button type="button" role="tab" data-z="e" aria-selected="false">الشرق</button>
+          <button type="button" role="tab" data-z="c" aria-selected="false">الوسط</button>
+          <button type="button" role="tab" data-z="w" aria-selected="false">الغرب</button>
+          <button type="button" role="tab" data-z="s" aria-selected="false">الجنوب</button>
+        </div>
+        <ul class="rm__chips" id="rm-chips"></ul>
+      </div>
+      <div class="rm__map">
+        <svg viewBox="0 0 410 440" role="img" aria-label="خريطة مناطق الرياض التي يخدمها فريق وهج">
+          <defs>
+            <linearGradient id="rm-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2C70A8"/><stop offset="1" stop-color="#5FA98A"/></linearGradient>
+          </defs>
+          <g class="rm__zones">
+            <path data-z="n" d="M57 150 80 80 200 20 330 70 361 150 250 160 160 170Z"/>
+            <path data-z="e" d="M361 150 380 200 340 340 290 371 215 290 275 240 250 160Z"/>
+            <path data-z="s" d="M290 371 210 420 90 370 60 300 150 260 215 290Z"/>
+            <path data-z="w" d="M60 300 30 230 57 150 160 170 150 260Z"/>
+            <path data-z="c" d="M160 170 250 160 275 240 215 290 150 260Z"/>
+          </g>
+          <g class="rm__dots" aria-hidden="true">
+            <circle cx="150" cy="95" r="5"/><circle cx="235" cy="70" r="5"/><circle cx="290" cy="115" r="5"/><circle cx="110" cy="135" r="5"/>
+            <circle cx="330" cy="215" r="5"/><circle cx="300" cy="300" r="5"/><circle cx="345" cy="175" r="5"/>
+            <circle cx="160" cy="350" r="5"/><circle cx="235" cy="365" r="5"/><circle cx="115" cy="320" r="5"/>
+            <circle cx="70" cy="215" r="5"/><circle cx="110" cy="260" r="5"/>
+            <circle cx="200" cy="205" r="5"/><circle cx="235" cy="250" r="5"/>
+          </g>
+          <g class="rm__labels" aria-hidden="true">
+            <text x="210" y="118">الشمال</text><text x="312" y="252">الشرق</text><text x="185" y="342">الجنوب</text><text x="98" y="232">الغرب</text><text x="212" y="230">الوسط</text>
+          </g>
+          <g class="rm__pin" id="rm-pin" aria-hidden="true"><circle r="16"/><path d="M0 -30c-9 0-15 7-15 15 0 11 15 24 15 24s15-13 15-24c0-8-6-15-15-15z"/><circle cy="-15" r="5" fill="#fff"/></g>
+        </svg>
+      </div>
+    </div>
+  </section>
+  <script>
+  (() => {
+    const Z = {
+      n: { name: 'شمال الرياض', d: ['الملقا','الياسمين','النرجس','حطين','العارض','الصحافة','القيروان','الربيع','الندى','العقيق','الغدير','الوادي','النخيل','المروج','الرحمانية','الفلاح'], at: [205, 105] },
+      e: { name: 'شرق الرياض', d: ['الروضة','النسيم','الريان','الحمراء','القدس','الخليج','النهضة','الرمال','المونسية','إشبيلية','غرناطة','قرطبة','الأندلس','اليرموك','الشهداء','المعيزيلة'], at: [310, 240] },
+      c: { name: 'وسط الرياض', d: ['العليا','السليمانية','الملز','المربع','الورود','الملك فهد','المعذر','الوزارات','الضباط','جرير','الفوطة','الديرة'], at: [212, 222] },
+      w: { name: 'غرب الرياض', d: ['السويدي','العريجاء','ظهرة لبن','نمار','طويق','عرقة','ظهرة البديعة','البديعة'], at: [98, 225] },
+      s: { name: 'جنوب الرياض', d: ['الشفا','العزيزية','الدار البيضاء','المنصورة','بدر','الحزم','عكاظ','المروة','الفيصلية','الجزيرة','السلي','الدريهمية'], at: [185, 345] },
+    };
+    const WA = d => 'https://wa.me/966550771338?text=' + encodeURIComponent(`السلام عليكم، أبغى خدمة تنظيف في حي ${d}`);
+    const norm = s => s.trim().replace(/^حي\s+/, '').replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').replace(/^ال/, '').replace(/\s+/g, ' ');
+    const $ = id => document.getElementById(id);
+    const sec = $('areas'); if (!sec) return;
+    const chips = $('rm-chips'), tabs = [...sec.querySelectorAll('[role=tab]')], zones = [...sec.querySelectorAll('.rm__zones path')];
+    const pin = $('rm-pin'), res = $('rm-result');
+    $('rm-list').innerHTML = Object.values(Z).flatMap(z => z.d).map(d => `<option value="${d}">`).join('');
+    const show = (k, focus) => {
+      tabs.forEach(t => t.setAttribute('aria-selected', t.dataset.z === k));
+      zones.forEach(p => p.classList.toggle('on', p.dataset.z === k));
+      chips.innerHTML = Z[k].d.map(d => `<li><a href="${WA(d)}" class="${d === focus ? 'hit' : ''}">${d}</a></li>`).join('');
+      pin.setAttribute('transform', `translate(${Z[k].at[0]} ${Z[k].at[1]})`);
+      pin.classList.remove('drop'); void pin.getBoundingClientRect(); pin.classList.add('drop');
+    };
+    tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.z)));
+    zones.forEach(p => p.addEventListener('click', () => show(p.dataset.z)));
+    $('rm-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const q = norm($('rm-q').value); if (!q) return;
+      let hit = null;
+      for (const [k, z] of Object.entries(Z)) { const d = z.d.find(x => norm(x) === q) || z.d.find(x => norm(x).includes(q)); if (d) { hit = [k, d]; break; } }
+      res.hidden = false;
+      if (hit) {
+        show(hit[0], hit[1]);
+        res.className = 'rm__result ok';
+        res.innerHTML = `<b>نخدم حي ${hit[1]}</b> في ${Z[hit[0]].name}.<a class="btn btn--wa" href="${WA(hit[1])}"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>احجز في ${hit[1]}</a>`;
+      } else {
+        const v = $('rm-q').value.trim();
+        res.className = 'rm__result';
+        res.innerHTML = `ما لقينا «${v.replace(/[<>&"]/g, '')}» في القائمة. راسلنا ونأكد لك الموعد في حيّك.<a class="btn btn--wa" href="${WA(v)}"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>راسلنا على واتساب</a>`;
+      }
+    });
+    show('n');
+  })();
+  </script>
 </main>
 <dialog id="offer-dlg" aria-labelledby="dlg-h">
   <button class="dlg__close" type="button" aria-label="إغلاق" data-dlg-close><svg width="16" height="16" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
@@ -397,6 +491,6 @@ document.addEventListener('click',e=>{
 </div>
 
 
-<script src="/assets/site.js?v=mwu3lg6r" defer></script>
+<script src="/assets/site.js?v=mwu3yg68" defer></script>
 </body>
 </html>

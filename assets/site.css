@@ -352,3 +352,51 @@ html{scrollbar-color:#B8C6DA var(--surface)}
   .st-ring a.on span{animation:st-pulse 2.4s ease-in-out infinite}
 }
 @keyframes st-pulse{50%{box-shadow:0 0 0 4px rgba(150,204,138,.35)}}
+
+/* homepage: Riyadh districts map */
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.rm__grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(32px,5vw,80px);align-items:center}
+.rm h2{font-size:clamp(28px,3.4vw,42px);line-height:1.25;font-weight:800}
+.rm__lead{color:var(--muted);margin-top:10px;max-width:46ch;line-height:1.8}
+.rm__search{position:relative;display:flex;align-items:center;gap:8px;margin-top:26px;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:6px 6px 6px 6px;padding-inline-start:46px;max-width:480px;box-shadow:0 14px 30px -22px rgba(31,37,64,.5);transition:border-color .2s,box-shadow .2s}
+.rm__search:focus-within{border-color:var(--blue);box-shadow:0 0 0 4px rgba(44,112,168,.12)}
+.rm__search>.ico{position:absolute;inset-inline-start:18px;width:20px;height:20px;color:var(--blue)}
+.rm__search input{flex:1;min-width:0;border:0;outline:0;background:none;font:inherit;font-size:16px;color:var(--ink);height:44px}
+.rm__search input::-webkit-search-cancel-button{display:none}
+.rm__search .btn{min-height:44px;padding:0 20px}
+.rm__result{margin-top:14px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;background:var(--surface);border-radius:var(--r-md);padding:12px 16px;max-width:480px;color:var(--ink);font-size:15px}
+.rm__result.ok{background:var(--surface-2)}
+.rm__result.ok b{color:var(--green-ink)}
+.rm__result .btn{min-height:40px;padding:0 16px;font-size:14.5px}
+.rm__tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.rm__tabs button{font:inherit;font-weight:700;font-size:14.5px;color:var(--navy);background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:7px 16px;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.rm__tabs button:hover{border-color:var(--green)}
+.rm__tabs button[aria-selected=true]{background:var(--navy);border-color:var(--navy);color:#fff}
+.rm__chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;max-width:560px}
+.rm__chips a{display:inline-block;font-size:14px;font-weight:600;color:var(--ink);background:var(--surface);border-radius:999px;padding:5px 13px;transition:background .2s,color .2s}
+.rm__chips a:hover,.rm__chips a.hit{background:var(--green);color:#16331A}
+.rm__map svg{width:100%;max-width:470px;height:auto;display:block;margin-inline:auto;overflow:visible}
+.rm__zones path{fill:#E3EEF8;stroke:#fff;stroke-width:5;stroke-linejoin:round;cursor:pointer;transition:fill .35s}
+.rm__zones path:hover{fill:#CFE2F3}
+.rm__zones path.on{fill:url(#rm-g)}
+.rm__dots circle{fill:#fff;stroke:var(--blue);stroke-width:2.5}
+.rm__labels text{font-family:inherit;font-weight:800;font-size:15px;fill:var(--navy);text-anchor:middle;pointer-events:none}
+.rm__pin{color:var(--green);pointer-events:none}
+.rm__pin>circle:first-child{fill:rgba(150,204,138,.35)}
+.rm__pin path{fill:#2F6B23}
+@media (prefers-reduced-motion:no-preference){
+  .rm__dots circle{transform-box:fill-box;transform-origin:center;animation:rm-blink 2.8s ease-in-out infinite}
+  .rm__dots circle:nth-child(3n){animation-delay:-.9s}.rm__dots circle:nth-child(3n+1){animation-delay:-1.8s}
+  .rm__pin.drop path,.rm__pin.drop circle:last-child{animation:rm-drop .5s cubic-bezier(.3,1.6,.5,1)}
+  .rm__pin>circle:first-child{transform-box:fill-box;transform-origin:center;animation:rm-ring 1.8s ease-out infinite}
+}
+@keyframes rm-blink{50%{transform:scale(1.5);fill:var(--green)}}
+@keyframes rm-drop{from{transform:translateY(-26px);opacity:0}}
+@keyframes rm-ring{from{transform:scale(.5);opacity:1}to{transform:scale(1.8);opacity:0}}
+@media (max-width:900px){
+  .rm__grid{grid-template-columns:1fr;gap:28px}
+  .rm__lead,.rm__search,.rm__result,.rm__chips{margin-inline:auto}
+  .rm__tabs,.rm__chips,.rm__result{justify-content:center}
+
+  .rm__map svg{max-width:330px}
+}
