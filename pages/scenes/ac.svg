@@ -1,0 +1,35 @@
+<svg viewBox="0 0 520 520">
+<defs>
+<linearGradient id="ac-soft" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E3EEF8"/><stop offset="1" stop-color="#EAF5E6"/></linearGradient>
+<linearGradient id="ac-brand" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2C70A8"/><stop offset="1" stop-color="#96CC8A"/></linearGradient>
+</defs>
+<path d="M260 22c118 0 228 64 236 196 8 128-80 268-226 280C120 510 22 420 20 286 18 154 142 22 260 22z" fill="url(#ac-soft)"/>
+<!-- unit -->
+<rect x="92" y="140" width="336" height="124" rx="26" fill="#fff" stroke="#3D4770" stroke-width="9"/>
+<rect x="116" y="164" width="200" height="12" rx="6" fill="#E4ECF5"/>
+<circle cx="392" cy="172" r="7" fill="#4ADE80"/>
+<path d="M112 230h296M112 246h296" stroke="#3D4770" stroke-width="5" stroke-linecap="round" opacity=".75"/>
+<!-- dust on unit & falling -->
+<g class="dirt">
+<path d="M120 204h280" stroke="#8C7A5B" stroke-width="12" stroke-linecap="round" opacity=".35"/>
+<g fill="#8C7A5B" opacity=".6"><circle cx="150" cy="284" r="5"/><circle cx="196" cy="300" r="4"/><circle cx="250" cy="290" r="6"/><circle cx="300" cy="306" r="4"/><circle cx="350" cy="288" r="5"/><circle cx="220" cy="326" r="3"/><circle cx="330" cy="330" r="4"/></g>
+<path d="M150 296q14 18 0 36M260 300q14 18 0 36M360 296q14 18 0 36" stroke="#9C8B6D" stroke-width="4" fill="none" stroke-linecap="round" opacity=".45"/>
+</g>
+<!-- fresh air -->
+<g class="clean" fill="none" stroke-linecap="round" stroke-width="7">
+<path d="M130 300c30-18 60 18 90 0s60-18 90 0 60 18 90 0" stroke="#7FB6E6"/>
+<path d="M150 340c30-18 60 18 90 0s60-18 90 0 40 12 60 4" stroke="#96CC8A"/>
+<path d="M170 380c30-18 60 18 90 0s50-14 70-4" stroke="#7FB6E6" opacity=".7"/>
+</g>
+<g class="clean" fill="#2C70A8">
+<path d="M410 330l6 10h12l-6 10 6 10h-12l-6 10-6-10h-12l6-10-6-10h12z" opacity=".85"/>
+</g>
+<!-- sparkles -->
+<g fill="#96CC8A"><path class="spk" d="M140 104c2 14 7 19 21 21-14 2-19 7-21 21-2-14-7-19-21-21 14-2 19-7 21-21z"/><path class="spk" d="M380 96c2 18 9 25 27 27-18 2-25 9-27 27-2-18-9-25-27-27 18-2 25-9 27-27z" fill="#2C70A8"/><path class="spk" d="M262 98c1 11 5 15 16 16-11 1-15 5-16 16-1-11-5-15-16-16 11-1 15-5 16-16z"/></g>
+<!-- duster -->
+<g transform="translate(260 204)"><g class="sweep"><g transform="rotate(-24)">
+<rect x="-6" y="0" width="12" height="86" rx="6" fill="#3D4770"/>
+<ellipse cx="0" cy="-12" rx="34" ry="24" fill="url(#ac-brand)"/>
+<path d="M-26-20l-10-10M-12-30l-4-12M6-32l4-12M22-24l10-10" stroke="#96CC8A" stroke-width="5" stroke-linecap="round"/>
+</g></g></g>
+</svg>

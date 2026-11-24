@@ -1,0 +1,93 @@
+<!--meta
+{"out":"price-calculator/index.html",
+ "title":"احسب سعر التنظيف واحجز | وهج لخدمات التنظيف بالرياض",
+ "description":"احسب سعر تنظيف المنازل والكنب والمكيفات والمكاتب ورش المبيدات بالرياض في دقيقة، واحجز موعدك على واتساب. قسّط مع تابي وتمارا.",
+ "canonical":"https://www.wahjclean.sa/price-calculator/",
+ "current":"/price-calculator/"}
+-->
+<!--head-->
+<link rel="stylesheet" href="/assets/calc.css">
+<script src="/assets/calc.js" defer></script>
+<!--/head-->
+<!--body-->
+<main id="main" class="calc-page">
+  <!--ICONS-->
+  <section class="c-top" aria-labelledby="calc-h">
+    <div class="wrap">
+      <nav aria-label="مسار التنقل"><ol class="crumbs"><li><a href="/">الرئيسية</a></li><li><span aria-current="page">حاسبة الأسعار</span></li></ol></nav>
+      <h1 id="calc-h">احسب سعر التنظيف <span class="g1">واحجز في دقيقة</span></h1>
+      <p class="c-lead">اختر الخدمة، حدد اللي تبيه، وشوف السعر قدامك. بعدها اختر الموعد وأرسل طلبك على واتساب.</p>
+      <ul class="c-checks">
+        <li><svg class="ico"><use href="#i-check"/></svg>سعر واضح قبل الحجز</li>
+        <li><svg class="ico"><use href="#i-check"/></svg>كل أحياء الرياض</li>
+        <li><svg class="ico"><use href="#i-check"/></svg>قسّط مع تابي وتمارا</li>
+      </ul>
+      <p class="demo"><svg class="ico" aria-hidden="true"><use href="#i-spark"/></svg>الأسعار المعروضة تجريبية للعرض فقط، والسعر النهائي يتأكد قبل البدء.</p>
+      <div class="prog-wrap">
+        <ol class="prog" style="--p:0">
+          <li class="is-on"><button type="button" data-prog="1"><span>1</span>الخدمات</button></li>
+          <li><button type="button" data-prog="2"><span>2</span>السلة</button></li>
+          <li><button type="button" data-prog="3"><span>3</span>الموعد</button></li>
+          <li><button type="button" data-prog="4"><span>4</span>بياناتك</button></li>
+        </ol>
+        <p class="steplabel" id="c-steplabel" aria-live="polite">الخطوة 1 من 4 · الخدمات</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-body">
+    <div class="wrap c-grid">
+      <div class="c-main">
+        <div class="c-step" data-step="1">
+          <h2 class="c-h">وش تبي ننظف؟</h2>
+          <div class="cats" id="c-cats"></div>
+          <div class="panel" id="c-panel" hidden aria-labelledby="pn-h"></div>
+        </div>
+
+        <div class="c-step" data-step="2" hidden>
+          <h2 class="c-h">سلتك</h2>
+          <div id="c-cart"></div>
+        </div>
+
+        <div class="c-step" data-step="3" hidden>
+          <h2 class="c-h">متى يناسبك؟</h2>
+          <p class="c-sub">اختر اليوم</p>
+          <div class="days" id="c-days" role="radiogroup" aria-label="اليوم"></div>
+          <p class="c-sub">اختر الفترة</p>
+          <div class="periods" role="radiogroup" aria-label="الفترة">
+            <button type="button" class="period" role="radio" aria-checked="false" data-period="am"><svg class="ico"><use href="#i-sun"/></svg><b>صباحي</b><span>من الصبح للظهر</span></button>
+            <button type="button" class="period" role="radio" aria-checked="false" data-period="pm"><svg class="ico"><use href="#i-moon"/></svg><b>مسائي</b><span>من العصر للمساء</span></button>
+          </div>
+        </div>
+
+        <div class="c-step" data-step="4" hidden>
+          <h2 class="c-h">بياناتك</h2>
+          <div class="form">
+            <label class="field"><span>الاسم</span><input id="c-name" type="text" autocomplete="name" placeholder="محمد"><small class="c-err" id="err-name" hidden>اكتب اسمك.</small></label>
+            <label class="field"><span>الحي</span><select id="c-district" autocomplete="address-level3"></select><small class="c-err" id="err-district" hidden>اختر الحي.</small></label>
+            <label class="field field--wide"><span>ملاحظات <em>(اختياري)</em></span><textarea id="c-notes" rows="3" placeholder="مثال: الدور الثاني، يوجد مصعد"></textarea></label>
+          </div>
+          <div class="c-review" id="c-review"></div>
+          <p class="sent" id="c-sent" hidden><svg class="ico"><use href="#i-check"/></svg>فتحنا لك واتساب برسالة جاهزة فيها طلبك. اضغط «إرسال» عشان يوصلنا.</p>
+        </div>
+      </div>
+
+      <aside class="c-side" aria-label="ملخص الطلب">
+        <div class="side-card">
+          <div class="side-head"><h2>طلبك</h2><span class="badge"><svg class="ico"><use href="#i-calc"/></svg><span id="c-count">0</span></span></div>
+          <ul class="side-lines" id="side-lines"></ul>
+          <div class="side-total"><span>الإجمالي التقريبي</span><b data-total>0 ريال</b></div>
+          <p class="c-err" id="side-err" hidden></p>
+          <button type="button" class="btn btn--primary side-next" data-next>كمّل الحجز</button>
+          <div class="side-pay">قسّط مع<img src="/assets/old/tabby.png" alt="تابي"><img src="/assets/old/tamara.png" alt="تمارا"></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="c-bar" hidden>
+    <p class="c-err" data-bar-err hidden></p>
+    <div class="c-bar__row"><div><small>الإجمالي التقريبي</small><b data-total>0 ريال</b></div><button type="button" class="btn btn--primary" data-next>كمّل الحجز</button></div>
+  </div>
+</main>
+<!--/body-->

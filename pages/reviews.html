@@ -1,0 +1,134 @@
+<!--meta
+{"out":"reviews/index.html",
+ "title":"آراء العملاء | وهج لخدمات التنظيف بالرياض",
+ "description":"اقرأ آراء وتقييمات عملاء وهج لخدمات التنظيف بالرياض في تنظيف المنازل وغسيل الكنب والمكيفات والمكاتب، وشاركنا تقييمك.",
+ "canonical":"https://www.wahjclean.sa/reviews/",
+ "current":"/reviews/"}
+-->
+<!--head-->
+<link rel="stylesheet" href="/assets/service.css">
+<link rel="stylesheet" href="/assets/calc.css">
+<!--/head-->
+<!--body-->
+<main id="main" class="rv-page">
+  <!--ICONS-->
+  <section class="c-top fq-top" aria-labelledby="rv-h">
+    <svg class="ab-spark ab-spark--a" aria-hidden="true"><use href="#i-spark"/></svg>
+    <svg class="ab-spark ab-spark--b" aria-hidden="true"><use href="#i-spark"/></svg>
+    <div class="wrap rv-top">
+      <div>
+        <nav aria-label="مسار التنقل"><ol class="crumbs"><li><a href="/">الرئيسية</a></li><li><span aria-current="page">آراء العملاء</span></li></ol></nav>
+        <h1 id="rv-h">آراء عملاء <span class="g1">وهج</span></h1>
+        <p class="c-lead">تجارب عملائنا في أحياء الرياض، بكلامهم.</p>
+      </div>
+      <div class="rv-score" aria-live="polite">
+        <div class="rv-score__num"><b id="rv-avg">–</b><div class="stars" id="rv-stars" aria-hidden="true"></div><small id="rv-count">جارٍ التحميل</small></div>
+        <ul class="rv-bars" id="rv-bars"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-body rv-body">
+    <div class="wrap">
+      <div class="rv-tools">
+        <div class="fq-chips" id="rv-chips" role="group" aria-label="تصفية حسب الخدمة"></div>
+        <label class="rv-sort"><span>ترتيب</span><select id="rv-sort"><option value="new">الأحدث</option><option value="high">الأعلى تقييمًا</option><option value="low">الأقل تقييمًا</option></select></label>
+      </div>
+      <div class="rv-grid" id="rv-grid"></div>
+      <div class="empty" id="rv-empty" hidden><svg class="ico"><use href="#i-star"/></svg><b>ما فيه تقييمات لهذي الخدمة للحين</b><p>كن أول من يقيّم تجربته معنا.</p></div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="write-h">
+    <div class="wrap rv-write">
+      <div class="rv-write__txt">
+        <h2 id="write-h">جرّبت خدمتنا؟ شاركنا رأيك</h2>
+        <p>تقييمك يساعدنا نتحسن، ويساعد غيرك يختار. اختر النجوم واكتب رأيك، ويوصلنا على واتساب، أو قيّمنا على Google.</p>
+        <a class="btn btn--ghost" id="rv-google" href="#"><svg class="ico"><use href="#i-star"/></svg>قيّمنا على Google</a>
+      </div>
+      <form class="ct-form" id="rv-form" novalidate aria-labelledby="write-h">
+        <fieldset class="rate">
+          <legend>تقييمك</legend>
+          <div class="rate__stars" id="rate">
+            <input type="radio" name="r" id="r5" value="5"><label for="r5" title="ممتاز"><svg><use href="#i-star"/></svg><span class="sr-only">5 نجوم</span></label>
+            <input type="radio" name="r" id="r4" value="4"><label for="r4" title="جيد جدًا"><svg><use href="#i-star"/></svg><span class="sr-only">4 نجوم</span></label>
+            <input type="radio" name="r" id="r3" value="3"><label for="r3" title="جيد"><svg><use href="#i-star"/></svg><span class="sr-only">3 نجوم</span></label>
+            <input type="radio" name="r" id="r2" value="2"><label for="r2" title="مقبول"><svg><use href="#i-star"/></svg><span class="sr-only">نجمتان</span></label>
+            <input type="radio" name="r" id="r1" value="1"><label for="r1" title="ضعيف"><svg><use href="#i-star"/></svg><span class="sr-only">نجمة واحدة</span></label>
+          </div>
+          <small class="c-err" id="e-r" hidden>اختر عدد النجوم.</small>
+        </fieldset>
+        <div class="form">
+          <label class="field"><span>الاسم</span><input id="w-name" type="text" autocomplete="name" placeholder="محمد"><small class="c-err" id="e-name" hidden>اكتب اسمك.</small></label>
+          <label class="field"><span>الخدمة</span><select id="w-svc"><option value="">اختر الخدمة</option></select><small class="c-err" id="e-svc" hidden>اختر الخدمة.</small></label>
+          <label class="field field--wide"><span>رأيك</span><textarea id="w-text" rows="4" placeholder="كيف كانت تجربتك مع فريق وهج؟"></textarea><small class="c-err" id="e-text" hidden>اكتب رأيك بكلمتين على الأقل.</small></label>
+        </div>
+        <button class="btn btn--wa ct-send" type="submit"><svg class="ico"><use href="#i-wa"/></svg>أرسل تقييمك</button>
+        <p class="sent" id="rv-sent" hidden><svg class="ico"><use href="#i-check"/></svg>شكرًا لك! فتحنا لك واتساب برسالة جاهزة، اضغط «إرسال» عشان يوصلنا تقييمك.</p>
+      </form>
+    </div>
+  </section>
+</main>
+<script>
+(async () => {
+  const SVC = { homes: 'تنظيف منازل', sofa: 'كنب وسجاد', office: 'مكاتب', ac: 'مكيفات', pest: 'مبيدات', shop: 'محلات', new: 'منازل جديدة' };
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const star = on => `<svg class="${on ? '' : 'off'}"><use href="#i-star"/></svg>`;
+  const fmtDate = d => new Intl.DateTimeFormat('ar-SA-u-nu-latn-ca-gregory', { month: 'long', year: 'numeric' }).format(new Date(d));
+  $('w-svc').innerHTML += Object.values(SVC).map(n => `<option>${n}</option>`).join('');
+
+  let D;
+  try { D = await (await fetch('/data/reviews.json', { cache: 'no-store' })).json(); }
+  catch { $('rv-grid').innerHTML = '<p class="c-err">تعذّر تحميل التقييمات. حدّث الصفحة.</p>'; $('rv-count').textContent = 'غير متاحة'; return; }
+  const all = D.reviews || [];
+  if (D.googleUrl && D.googleUrl !== '#') $('rv-google').href = D.googleUrl;
+
+  // summary + distribution
+  const avg = all.reduce((a, r) => a + r.rating, 0) / (all.length || 1);
+  $('rv-avg').textContent = avg.toFixed(1);
+  $('rv-stars').innerHTML = [1, 2, 3, 4, 5].map(i => star(i <= Math.round(avg))).join('');
+  $('rv-count').textContent = `من ${all.length} تقييمات`;
+  $('rv-bars').innerHTML = [5, 4, 3, 2, 1].map(n => { const c = all.filter(r => r.rating === n).length, p = all.length ? c / all.length * 100 : 0;
+    return `<li><span>${n}</span><svg class="ico"><use href="#i-star"/></svg><span class="bar"><i style="width:${p}%"></i></span><b>${c}</b></li>`; }).join('');
+
+  // chips
+  const counts = all.reduce((m, r) => (m[r.service] = (m[r.service] || 0) + 1, m), {});
+  $('rv-chips').innerHTML = `<button type="button" class="chip" aria-pressed="true" data-f="all">الكل<span>${all.length}</span></button>` +
+    Object.keys(SVC).filter(k => counts[k]).map(k => `<button type="button" class="chip" aria-pressed="false" data-f="${k}">${SVC[k]}<span>${counts[k]}</span></button>`).join('');
+
+  let F = 'all';
+  const render = () => {
+    let list = F === 'all' ? [...all] : all.filter(r => r.service === F);
+    const s = $('rv-sort').value;
+    list.sort((a, b) => s === 'high' ? b.rating - a.rating || b.date.localeCompare(a.date) : s === 'low' ? a.rating - b.rating : b.date.localeCompare(a.date));
+    $('rv-empty').hidden = list.length > 0;
+    $('rv-grid').innerHTML = list.map(r => `<article class="review rv-card">
+      <div class="review__top"><div class="stars" role="img" aria-label="${r.rating} من 5">${[1, 2, 3, 4, 5].map(i => star(i <= r.rating)).join('')}</div><span class="review__svc">${SVC[r.service] || ''}</span></div>
+      <p>${esc(r.text)}</p>
+      <div class="review__who"><span class="avatar" aria-hidden="true">${esc(r.name.trim()[0])}</span><div><div class="review__name">${esc(r.name)}${r.sample ? '<span class="sample">مثال</span>' : ''}</div><div class="review__meta">${esc(r.area)} · ${fmtDate(r.date)}</div></div></div>
+    </article>`).join('');
+  };
+  render();
+  $('rv-chips').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; F = b.dataset.f;
+    $('rv-chips').querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(c === b))); render(); });
+  $('rv-sort').addEventListener('change', render);
+
+  // write a review -> WhatsApp
+  const form = $('rv-form');
+  form.addEventListener('input', e => { ({ 'w-name': 'e-name', 'w-text': 'e-text' })[e.target.id] && ($(({ 'w-name': 'e-name', 'w-text': 'e-text' })[e.target.id]).hidden = true); if (e.target.name === 'r') $('e-r').hidden = true; });
+  form.addEventListener('change', e => { if (e.target.id === 'w-svc') $('e-svc').hidden = true; if (e.target.name === 'r') $('e-r').hidden = true; });
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const r = form.querySelector('input[name="r"]:checked');
+    const checks = [[!r, 'e-r', form.querySelector('#r5')], [!$('w-name').value.trim(), 'e-name', $('w-name')], [!$('w-svc').value, 'e-svc', $('w-svc')], [$('w-text').value.trim().split(/\s+/).filter(Boolean).length < 2, 'e-text', $('w-text')]];
+    let first = null;
+    for (const [bad, id, el] of checks) { $(id).hidden = !bad; if (bad && !first) first = el; }
+    if (first) { first.focus(); return; }
+    const msg = [`تقييمي لوهج: ${'★'.repeat(+r.value)}${'☆'.repeat(5 - r.value)} (${r.value} من 5)`, `الاسم: ${$('w-name').value.trim()}`, `الخدمة: ${$('w-svc').value}`, `رأيي: ${$('w-text').value.trim()}`].join('\n');
+    window.open(`https://wa.me/966550771338?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+    $('rv-sent').hidden = false;
+  });
+})();
+</script>
+<!--/body-->

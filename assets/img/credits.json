@@ -1,0 +1,50 @@
+{
+ "note": "Credits for the photographs in this folder: photos.mjs credits prints the footer block for the ones the pages use.",
+ "photos": [
+  {
+   "file": "photo-f201267167.webp",
+   "files": [
+    "photo-f201267167-500.webp",
+    "photo-f201267167-960.webp",
+    "photo-f201267167.webp"
+   ],
+   "id": "f201267167",
+   "alt": "Middle-aged woman cleaning a window with a cloth and spray cleaner",
+   "by": "Shixart1985",
+   "licence": "CC BY 2.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Middle-aged_woman_cleaning_a_window_with_a_cloth_and_spray_cleaner.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f24332850.webp",
+   "files": [
+    "photo-f24332850-500.webp",
+    "photo-f24332850-960.webp",
+    "photo-f24332850.webp"
+   ],
+   "id": "f24332850",
+   "alt": "Cleaning windows",
+   "by": "Andrés Nieto Porras from Palma de Mallorca, España",
+   "licence": "CC BY-SA 2.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Cleaning_windows.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f130426317.webp",
+   "files": [
+    "photo-f130426317-500.webp",
+    "photo-f130426317-960.webp",
+    "photo-f130426317.webp"
+   ],
+   "id": "f130426317",
+   "alt": "Window cleaning 20220408 111417",
+   "by": "Ka23 13",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Window_cleaning_20220408_111417.jpg",
+   "source": "Wikimedia Commons"
+  }
+ ]
+}

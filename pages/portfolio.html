@@ -1,0 +1,130 @@
+<!--meta
+{"out":"portfolio/index.html",
+ "title":"معرض أعمال وهج | قبل وبعد التنظيف بالرياض",
+ "description":"شوف شغل وهج لخدمات التنظيف بالرياض: صور قبل وبعد لتنظيف المنازل وغسيل الكنب والمكيفات والمكاتب والمحلات، وفيديوهات أعمالنا على تيك توك.",
+ "canonical":"https://www.wahjclean.sa/portfolio/",
+ "current":"/portfolio/"}
+-->
+<!--head-->
+<link rel="stylesheet" href="/assets/service.css">
+<link rel="stylesheet" href="/assets/calc.css">
+<!--/head-->
+<!--body-->
+<main id="main" class="pf-page">
+  <!--ICONS-->
+  <section class="c-top fq-top" aria-labelledby="pf-h">
+    <svg class="ab-spark ab-spark--a" aria-hidden="true"><use href="#i-spark"/></svg>
+    <svg class="ab-spark ab-spark--b" aria-hidden="true"><use href="#i-spark"/></svg>
+    <div class="wrap">
+      <nav aria-label="مسار التنقل"><ol class="crumbs"><li><a href="/">الرئيسية</a></li><li><span aria-current="page">معرض الأعمال</span></li></ol></nav>
+      <h1 id="pf-h">معرض أعمال وهج: <span class="g1">شوف الفرق بنفسك</span></h1>
+      <p class="c-lead">صور من شغلنا في الرياض. اسحب الخط في صور «قبل وبعد» وشوف كيف يرجع المكان يلمع.</p>
+    </div>
+  </section>
+
+  <section class="c-body pf-body">
+    <div class="wrap">
+      <div class="pf-feature" id="pf-feature"></div>
+      <div class="fq-chips" id="pf-chips" role="group" aria-label="تصفية الأعمال حسب الخدمة"></div>
+      <div class="pf-grid" id="pf-grid"></div>
+      <p class="pf-note">نضيف أعمال جديدة باستمرار. تابع فيديوهات شغلنا على تيك توك.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="tt-h">
+    <div class="wrap">
+      <div class="tt">
+        <div class="tt__ic"><svg><use href="#i-tiktok"/></svg></div>
+        <div class="tt__txt"><h2 id="tt-h">شغلنا بالفيديو</h2><p>فيديوهات قصيرة من مواقع العمل: قبل وبعد، وطريقة التنظيف خطوة بخطوة.</p></div>
+        <a class="btn btn--primary" id="pf-tt" href="https://www.tiktok.com/@wahaj_clean"><svg class="ico"><use href="#i-tiktok"/></svg>شوف حسابنا على تيك توك</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint" aria-labelledby="band-h">
+    <div class="wrap">
+      <div class="band">
+        <svg class="band__spark" aria-hidden="true"><use href="#i-spark"/></svg>
+        <div><h2 id="band-h">تبي مكانك يكون الصورة الجاية؟</h2><p>احسب سعرك في دقيقة، أو راسلنا على واتساب.</p></div>
+        <div class="band__cta">
+          <a class="btn btn--wa" href="https://wa.me/966550771338"><svg class="ico"><use href="#i-wa"/></svg>احجز عبر واتساب</a>
+          <a class="btn btn--ghost" href="/price-calculator/"><svg class="ico"><use href="#i-calc"/></svg>احسب سعرك</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="pf-dlg" id="pf-dlg" aria-labelledby="pf-dlg-h">
+    <button class="dlg__close" type="button" aria-label="إغلاق" data-close><svg width="16" height="16" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <div id="pf-dlg-body"></div>
+  </dialog>
+</main>
+<script>
+(async () => {
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  let D;
+  try { D = await (await fetch('/data/portfolio.json', { cache: 'no-store' })).json(); }
+  catch { document.getElementById('pf-grid').innerHTML = '<p class="c-err">تعذّر تحميل الأعمال. حدّث الصفحة.</p>'; return; }
+  if (D.tiktok) document.getElementById('pf-tt').href = D.tiktok;
+
+  // before/after component: drag, click, or keyboard (range input)
+  const ba = (it, big) => `
+    <div class="ba${big ? ' ba--big' : ''}" style="--x:50%">
+      <img class="ba__after" src="${it.after}" alt="${esc(it.title)} بعد التنظيف" loading="lazy">
+      <div class="ba__before${it.sample ? ' ba__before--sim' : ''}"><img src="${it.before}" alt="${esc(it.title)} قبل التنظيف" loading="lazy"></div>
+      <span class="ba__tag ba__tag--b">قبل</span><span class="ba__tag ba__tag--a">بعد</span>
+      <span class="ba__line" aria-hidden="true"><span class="ba__knob"><svg viewBox="0 0 24 24"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+      <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="اسحب للمقارنة بين قبل وبعد: ${esc(it.title)}">
+      ${it.sample ? '<span class="sample ba__sample">مثال</span>' : ''}
+    </div>`;
+  const bindBA = scope => scope.querySelectorAll('.ba').forEach(el => {
+    const r = el.querySelector('.ba__range');
+    const set = v => { el.style.setProperty('--x', `${v}%`); r.value = v; };
+    r.addEventListener('input', () => set(r.value));
+    let drag = false;
+    const pos = e => { const b = el.getBoundingClientRect(); return Math.min(100, Math.max(0, ((b.right - e.clientX) / b.width) * 100)); };
+    el.addEventListener('pointerdown', e => { if (e.target === r) return; drag = true; el.setPointerCapture(e.pointerId); set(Math.round(pos(e))); });
+    el.addEventListener('pointermove', e => { if (drag) set(Math.round(pos(e))); });
+    el.addEventListener('pointerup', () => { drag = false; });
+  });
+
+  // featured comparison
+  const feat = D.items.find(i => i.before);
+  if (feat) {
+    const f = document.getElementById('pf-feature');
+    f.innerHTML = `${ba(feat, true)}<div class="pf-feature__txt"><span class="pf-tag">${esc(D.services[feat.service] || '')}</span><h2>${esc(feat.title)}</h2><p>اسحب الخط يمين ويسار عشان تقارن المكان قبل وبعد تنظيف وهج.</p><a class="btn btn--primary" href="/price-calculator/?s=${feat.service === 'homes' ? 'homes' : feat.service}">احسب سعر خدمة مشابهة</a></div>`;
+    bindBA(f);
+  }
+
+  // chips
+  const counts = D.items.reduce((m, i) => (m[i.service] = (m[i.service] || 0) + 1, m), {});
+  const chips = document.getElementById('pf-chips');
+  chips.innerHTML = `<button type="button" class="chip" aria-pressed="true" data-f="all">الكل<span>${D.items.length}</span></button>` +
+    Object.entries(D.services).filter(([k]) => counts[k]).map(([k, n]) => `<button type="button" class="chip" aria-pressed="false" data-f="${k}">${esc(n)}<span>${counts[k]}</span></button>`).join('');
+
+  // grid
+  const grid = document.getElementById('pf-grid');
+  grid.innerHTML = D.items.map((it, i) => `
+    <button type="button" class="pf-card" data-i="${i}" data-s="${it.service}" aria-label="عرض: ${esc(it.title)}">
+      <span class="pf-card__img"><img src="${it.after}" alt="" loading="lazy">${it.before ? '<span class="pf-ba">قبل / بعد</span>' : ''}</span>
+      <span class="pf-card__txt"><small>${esc(D.services[it.service] || '')}</small><b>${esc(it.title)}</b></span>
+    </button>`).join('');
+  chips.addEventListener('click', e => {
+    const b = e.target.closest('.chip'); if (!b) return;
+    chips.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(c === b)));
+    grid.querySelectorAll('.pf-card').forEach(c => { c.hidden = b.dataset.f !== 'all' && c.dataset.s !== b.dataset.f; });
+  });
+
+  // lightbox
+  const dlg = document.getElementById('pf-dlg'), body = document.getElementById('pf-dlg-body');
+  grid.addEventListener('click', e => {
+    const c = e.target.closest('.pf-card'); if (!c) return;
+    const it = D.items[+c.dataset.i];
+    body.innerHTML = `${it.before ? ba(it, true) : `<img class="pf-dlg__img" src="${it.after}" alt="${esc(it.title)}">`}
+      <div class="pf-dlg__txt"><span class="pf-tag">${esc(D.services[it.service] || '')}</span><h2 id="pf-dlg-h">${esc(it.title)}</h2></div>`;
+    bindBA(body); dlg.showModal();
+  });
+  dlg.addEventListener('click', e => { if (e.target.closest('[data-close]') || e.target === dlg) dlg.close(); });
+})();
+</script>
+<!--/body-->

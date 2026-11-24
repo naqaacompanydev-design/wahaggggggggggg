@@ -1,0 +1,18 @@
+{
+  "_note": "صور مؤقتة من الموقع القديم. صور «قبل» في عناصر before/after مُحاكاة (sample: true) وتظهر عليها شارة «مثال» حتى يرسل العميل صور قبل وبعد حقيقية. أضف أعمالك هنا: before (اختياري) + after + service + title.",
+  "tiktok": "https://www.tiktok.com/@wahaj_clean",
+  "items": [
+    { "service": "homes", "title": "تنظيف زجاج ونوافذ فيلا", "after": "/assets/old/6a53ab878becf.png", "before": "/assets/old/6a53ab878becf.png", "sample": true },
+    { "service": "sofa", "title": "غسيل كنب وتعقيمه", "after": "/assets/old/6a53aaa518e00.png", "before": "/assets/old/6a53aaa518e00.png", "sample": true },
+    { "service": "office", "title": "تنظيف مكتب شركة", "after": "/assets/old/6a53b70f7270b.png" },
+    { "service": "ac", "title": "غسيل وحدات مكيفات", "after": "/assets/old/6a53b95818aec.png", "before": "/assets/old/6a53b95818aec.png", "sample": true },
+    { "service": "shop", "title": "تنظيف محل تجاري", "after": "/assets/old/6a53bc0dab095.png" },
+    { "service": "new", "title": "تأهيل منزل جديد بعد التشطيب", "after": "/assets/old/6a53a8d368e32.png" },
+    { "service": "pest", "title": "رش مبيدات لمنشأة", "after": "/assets/old/6a53b8666269b.png" },
+    { "service": "sofa", "title": "تنظيف مجلس وكنب", "after": "/assets/old/6a50931ac4dba.jpeg" }
+  ],
+  "services": {
+    "homes": "المنازل والفلل", "sofa": "الكنب والسجاد", "office": "المكاتب", "ac": "المكيفات",
+    "pest": "المبيدات", "shop": "المحلات", "new": "المنازل الجديدة"
+  }
+}

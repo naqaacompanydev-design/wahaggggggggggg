@@ -1,0 +1,35 @@
+<svg viewBox="0 0 520 520">
+<defs>
+<linearGradient id="sh-soft" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E3EEF8"/><stop offset="1" stop-color="#EAF5E6"/></linearGradient>
+<linearGradient id="sh-brand" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2C70A8"/><stop offset="1" stop-color="#96CC8A"/></linearGradient>
+<linearGradient id="sh-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CFE6F7"/><stop offset="1" stop-color="#F2F9FF"/></linearGradient>
+<clipPath id="sh-clip"><rect x="112" y="226" width="130" height="150" rx="6"/><rect x="278" y="226" width="130" height="150" rx="6"/></clipPath>
+</defs>
+<path d="M260 22c118 0 228 64 236 196 8 128-80 268-226 280C120 510 22 420 20 286 18 154 142 22 260 22z" fill="url(#sh-soft)"/>
+<ellipse cx="260" cy="430" rx="200" ry="14" fill="#3D4770" opacity=".08"/>
+<!-- facade -->
+<rect x="92" y="150" width="336" height="266" rx="14" fill="#fff" stroke="#3D4770" stroke-width="9"/>
+<rect x="150" y="112" width="220" height="40" rx="10" fill="#3D4770"/>
+<rect x="196" y="124" width="128" height="16" rx="8" fill="#96CC8A"/>
+<!-- awning -->
+<path d="M92 174h336v26c-14 18-28 18-42 0-14 18-28 18-42 0-14 18-28 18-42 0-14 18-28 18-42 0-14 18-28 18-42 0-14 18-28 18-42 0-14 18-28 18-42 0-14 18-28 18-42 0z" fill="#2C70A8"/>
+<path d="M134 174v26M218 174v26M302 174v26M386 174v26" stroke="#fff" stroke-width="20" opacity=".9"/>
+<!-- windows -->
+<rect x="112" y="226" width="130" height="150" rx="6" fill="url(#sh-sky)" stroke="#3D4770" stroke-width="6"/>
+<rect x="278" y="226" width="130" height="150" rx="6" fill="url(#sh-sky)" stroke="#3D4770" stroke-width="6"/>
+<g clip-path="url(#sh-clip)">
+<rect x="130" y="320" width="40" height="56" rx="6" fill="#96CC8A" opacity=".7"/><rect x="180" y="300" width="44" height="76" rx="6" fill="#7FB6E6" opacity=".7"/>
+<rect x="296" y="310" width="50" height="66" rx="6" fill="#7FB6E6" opacity=".7"/><rect x="354" y="330" width="36" height="46" rx="6" fill="#96CC8A" opacity=".7"/>
+<g class="dirt"><rect x="100" y="220" width="320" height="160" fill="#A8997C" opacity=".55"/><g fill="#7E705A" opacity=".45"><ellipse cx="160" cy="260" rx="30" ry="12"/><ellipse cx="340" cy="270" rx="34" ry="14"/><ellipse cx="200" cy="350" rx="24" ry="10"/><ellipse cx="370" cy="352" rx="20" ry="9"/></g></g>
+<rect class="glint" x="112" y="226" width="70" height="150" fill="#fff" opacity=".6" transform="skewX(-18)"/>
+</g>
+<rect x="86" y="410" width="348" height="14" rx="7" fill="#3D4770"/>
+<!-- sparkles -->
+<g fill="#96CC8A"><path class="spk" d="M180 250c2 14 7 19 21 21-14 2-19 7-21 21-2-14-7-19-21-21 14-2 19-7 21-21z"/><path class="spk" d="M350 280c2 18 9 25 27 27-18 2-25 9-27 27-2-18-9-25-27-27 18-2 25-9 27-27z" fill="#2C70A8"/><path class="spk" d="M440 120c1 11 5 15 16 16-11 1-15 5-16 16-1-11-5-15-16-16 11-1 15-5 16-16z"/></g>
+<!-- squeegee -->
+<g transform="translate(260 300)"><g class="sweep"><g transform="rotate(8)">
+<rect x="-6" y="-4" width="12" height="76" rx="6" fill="#3D4770"/>
+<rect x="-44" y="-18" width="88" height="18" rx="6" fill="url(#sh-brand)"/>
+<rect x="-46" y="-24" width="92" height="7" rx="3" fill="#3D4770"/>
+</g></g></g>
+</svg>

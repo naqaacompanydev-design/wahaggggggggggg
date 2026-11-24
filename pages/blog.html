@@ -1,0 +1,94 @@
+<!--meta
+{"out":"blog/index.html",
+ "title":"المدونة | نصائح التنظيف من وهج لخدمات التنظيف بالرياض",
+ "description":"مدونة وهج لخدمات التنظيف: نصائح تنظيف البيت، العناية بالكنب والسجاد، المكيفات، ومكافحة الحشرات في الرياض.",
+ "canonical":"https://www.wahjclean.sa/blog/",
+ "current":"/blog/"}
+-->
+<!--head-->
+<link rel="stylesheet" href="/assets/service.css">
+<link rel="stylesheet" href="/assets/calc.css">
+<!--/head-->
+<!--body-->
+<main id="main" class="blog-page">
+  <!--ICONS-->
+  <section class="c-top fq-top" aria-labelledby="bl-h">
+    <svg class="ab-spark ab-spark--a" aria-hidden="true"><use href="#i-spark"/></svg>
+    <svg class="ab-spark ab-spark--b" aria-hidden="true"><use href="#i-spark"/></svg>
+    <div class="wrap">
+      <nav aria-label="مسار التنقل"><ol class="crumbs"><li><a href="/">الرئيسية</a></li><li><span aria-current="page">المدونة</span></li></ol></nav>
+      <h1 id="bl-h">مدونة وهج: <span class="g1">نصائح تخلي بيتك يلمع</span></h1>
+      <p class="c-lead">نصائح عملية من فريقنا عن التنظيف والعناية بالبيت والأثاث والمكيفات، مكتوبة لأهل الرياض.</p>
+      <label class="fq-search" id="bl-search-wrap" hidden><svg class="ico" aria-hidden="true"><use href="#s-search"/></svg><span class="sr-only">ابحث في المقالات</span><input id="bl-q" type="search" placeholder="ابحث في المقالات" autocomplete="off"></label>
+    </div>
+  </section>
+
+  <section class="c-body bl-body">
+    <div class="wrap">
+      <div class="fq-chips" id="bl-chips" role="group" aria-label="تصنيفات المدونة"></div>
+      <div class="bl-grid" id="bl-grid"></div>
+
+      <div class="bl-empty" id="bl-empty" hidden>
+        <div class="bl-empty__art" aria-hidden="true">
+          <svg viewBox="0 0 200 160">
+            <rect x="34" y="22" width="132" height="116" rx="14" fill="#fff" stroke="#3D4770" stroke-width="5"/>
+            <rect x="52" y="42" width="70" height="10" rx="5" fill="#2C70A8"/>
+            <rect x="52" y="62" width="96" height="7" rx="3.5" fill="#C9D6E6"/>
+            <rect x="52" y="76" width="88" height="7" rx="3.5" fill="#C9D6E6"/>
+            <rect x="52" y="90" width="64" height="7" rx="3.5" fill="#C9D6E6"/>
+            <rect x="52" y="108" width="40" height="14" rx="7" fill="#96CC8A"/>
+            <path class="bl-spk" d="M168 14c1.4 10 5 14 15 15.4-10 1.4-13.6 5-15 15-1.4-10-5-13.6-15-15 10-1.4 13.6-5.4 15-15.4z" fill="#96CC8A"/>
+            <path class="bl-spk bl-spk--2" d="M30 112c1 7 3.6 9.6 10.6 10.6-7 1-9.6 3.6-10.6 10.6-1-7-3.6-9.6-10.6-10.6 7-1 9.6-3.6 10.6-10.6z" fill="#2C70A8"/>
+          </svg>
+        </div>
+        <h2>أول مقالاتنا في الطريق</h2>
+        <p>نجهز لك نصائح عملية في المواضيع هذي. لين ذاك الوقت، اسألنا أي سؤال عن التنظيف على واتساب.</p>
+        <ul class="bl-topics" id="bl-topics"></ul>
+        <div class="bl-empty__cta">
+          <a class="btn btn--wa" href="https://wa.me/966550771338"><svg class="ico"><use href="#i-wa"/></svg>اسألنا على واتساب</a>
+          <a class="btn btn--ghost" href="/faq/">الأسئلة الشائعة</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+(async () => {
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  let D;
+  try { D = await (await fetch('/data/posts.json', { cache: 'no-store' })).json(); }
+  catch { D = { categories: {}, posts: [] }; }
+  const posts = (D.posts || []).sort((a, b) => b.date.localeCompare(a.date));
+  const cats = D.categories || {};
+  const icons = { tips: 's-spray', home: 's-door', sofa: 's-sofa', ac: 's-ac', pest: 's-bug' };
+
+  if (!posts.length) {
+    $('bl-empty').hidden = false;
+    $('bl-topics').innerHTML = Object.entries(cats).map(([k, n]) => `<li><span class="bl-ti"><svg><use href="#${icons[k] || 's-spray'}"/></svg></span>${esc(n)}</li>`).join('');
+    return;
+  }
+
+  // listing (used once posts are added to data/posts.json)
+  $('bl-search-wrap').hidden = false;
+  const counts = posts.reduce((m, p) => (m[p.category] = (m[p.category] || 0) + 1, m), {});
+  $('bl-chips').innerHTML = `<button type="button" class="chip" aria-pressed="true" data-f="all">الكل<span>${posts.length}</span></button>` +
+    Object.entries(cats).filter(([k]) => counts[k]).map(([k, n]) => `<button type="button" class="chip" aria-pressed="false" data-f="${k}">${esc(n)}<span>${counts[k]}</span></button>`).join('');
+  const fmt = d => new Intl.DateTimeFormat('ar-SA-u-nu-latn-ca-gregory', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(d));
+  let F = 'all';
+  const render = () => {
+    const q = $('bl-q').value.trim();
+    const list = posts.filter(p => (F === 'all' || p.category === F) && (!q || (p.title + p.excerpt).includes(q)));
+    $('bl-grid').innerHTML = list.map((p, i) => `
+      <a class="bl-card${i === 0 && F === 'all' && !q ? ' bl-card--lead' : ''}" href="/blog/${esc(p.slug)}/">
+        <span class="bl-card__img">${p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy">` : ''}</span>
+        <span class="bl-card__body"><small>${esc(cats[p.category] || '')} · ${p.minutes || 3} دقائق قراءة</small><b>${esc(p.title)}</b><span>${esc(p.excerpt)}</span><em>${fmt(p.date)}</em></span>
+      </a>`).join('') || '<p class="fq-count">ما لقينا مقالات بهذي الكلمات.</p>';
+  };
+  render();
+  $('bl-q').addEventListener('input', render);
+  $('bl-chips').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; F = b.dataset.f;
+    $('bl-chips').querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(c === b))); render(); });
+})();
+</script>
+<!--/body-->
