@@ -32,6 +32,8 @@ for (const file of walk(path.join(root, 'pages'))) {
     .replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${esc(meta.title)}">`)
     .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${esc(meta.description)}">`)
     .replace(' aria-current="page"', '')
+    // homepage-only head items (dark hero styles) stay out of inner pages
+    .replace(/<!--home-->[\s\S]*?<!--\/home-->\n?/, '')
     .replace('</head>', `${head.trim()}\n</head>`);
   if (meta.current) top = top.replace(`class="nav__link" href="${meta.current}"`, `class="nav__link" href="${meta.current}" aria-current="page"`);
 
