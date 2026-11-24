@@ -282,7 +282,9 @@ html{scrollbar-color:#B8C6DA var(--surface)}
   .hero h1{margin:16px 0 12px}
   .hero__cta{flex-direction:column;margin-top:24px}
   .hero__cta .btn{width:100%}
-  .proof{flex-wrap:wrap;gap:12px 18px;margin-top:24px;padding-top:20px}
+  .proof{flex-wrap:wrap;gap:12px 18px;margin-top:24px;padding-top:20px;justify-content:center}
+  .hero__text{text-align:center}
+  .hero__lead{margin-inline:auto}
   .media{height:auto;min-height:0;aspect-ratio:4/3.6}
   .media__frame{border-radius:var(--r-md) var(--r-md) var(--r-md) 80px}
   .float{inset-inline-end:12px;bottom:12px;width:auto;padding:10px 12px}
@@ -323,3 +325,13 @@ html{scrollbar-color:#B8C6DA var(--surface)}
 }
 
 [hidden]{display:none!important}
+
+/* phones: the whole site reads centred, stacked top to bottom */
+@media (max-width:900px){
+  main,.footer{text-align:center}
+  main :is(input,select,textarea){text-align:start}
+  main :is(ul,ol){padding-inline-start:0}
+  .head{flex-direction:column;align-items:center;justify-content:center;gap:12px}
+  .head p,.hero__lead{margin-inline:auto}
+  main :is(.hero__cta,.proof,.chips,.btns,.cta,.ab-cta){justify-content:center;align-items:center}
+}
