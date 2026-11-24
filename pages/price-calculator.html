@@ -10,7 +10,7 @@
 <script src="/assets/calc.js" defer></script>
 <!--/head-->
 <!--body-->
-<main id="main" class="calc-page">
+<main id="main" class="calc-page" style="--p:0">
   <!--ICONS-->
   <section class="c-top" aria-labelledby="calc-h">
     <div class="wrap">
@@ -24,7 +24,7 @@
       </ul>
       <p class="demo"><svg class="ico" aria-hidden="true"><use href="#i-spark"/></svg>الأسعار المعروضة تجريبية للعرض فقط، والسعر النهائي يتأكد قبل البدء.</p>
       <div class="prog-wrap">
-        <ol class="prog" style="--p:0">
+        <ol class="prog">
           <li class="is-on"><button type="button" data-prog="1"><span>1</span>الخدمات</button></li>
           <li><button type="button" data-prog="2"><span>2</span>السلة</button></li>
           <li><button type="button" data-prog="3"><span>3</span>الموعد</button></li>
@@ -58,6 +58,7 @@
             <button type="button" class="period" role="radio" aria-checked="false" data-period="am"><svg class="ico"><use href="#i-sun"/></svg><b>صباحي</b><span>من الصبح للظهر</span></button>
             <button type="button" class="period" role="radio" aria-checked="false" data-period="pm"><svg class="ico"><use href="#i-moon"/></svg><b>مسائي</b><span>من العصر للمساء</span></button>
           </div>
+          <p class="c-note" id="c-amnote" hidden>الفترة الصباحية خلصت اليوم. اختر المسائية أو يوم ثاني.</p>
         </div>
 
         <div class="c-step" data-step="4" hidden>
@@ -76,7 +77,9 @@
         <div class="side-card">
           <div class="side-head"><h2>طلبك</h2><span class="badge"><svg class="ico"><use href="#i-calc"/></svg><span id="c-count">0</span></span></div>
           <ul class="side-lines" id="side-lines"></ul>
+          <div class="cp-wrap" id="cp-side-box"></div>
           <div class="side-total"><span>الإجمالي التقريبي</span><b data-total>0 ريال</b></div>
+          <small class="side-inst" id="side-inst"></small>
           <p class="c-err" id="side-err" hidden></p>
           <button type="button" class="btn btn--primary side-next" data-next>كمّل الحجز</button>
           <div class="side-pay">قسّط مع<img src="/assets/img/tabby.webp" width="288" height="88" alt="تابي"><img src="/assets/img/tamara.webp" width="288" height="88" alt="تمارا"></div>
@@ -86,6 +89,8 @@
   </section>
 
   <div class="c-bar" hidden>
+    <div class="c-bar__prog" aria-hidden="true"><i></i></div>
+    <p class="c-bar__step" id="c-barstep" aria-live="polite"></p>
     <p class="c-err" data-bar-err hidden></p>
     <div class="c-bar__row"><div><small>الإجمالي التقريبي</small><b data-total>0 ريال</b></div><button type="button" class="btn btn--primary" data-next>كمّل الحجز</button></div>
   </div>
