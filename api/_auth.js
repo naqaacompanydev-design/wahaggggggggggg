@@ -55,7 +55,7 @@ async function who(req, res, need) {
   try { email = await verifyToken((req.headers.authorization || '').replace(/^Bearer\s+/i, '')); }
   catch { F.send(res, 401, { error: 'سجّل الدخول تاني' }); return null; }
   let role = null;
-  try { role = await roleOf(email); } catch { F.send(res, 502, { error: 'ما قدرنا نتحقق من صلاحيتك، جرّب بعد شوية' }); return null; }
+  try { role = await roleOf(email); } catch (e) { console.error('[auth] role check', e.message, e.detail ? JSON.stringify(e.detail).slice(0, 500) : ''); F.send(res, 502, { error: 'ما قدرنا نتحقق من صلاحيتك، جرّب بعد شوية' }); return null; }
   if (!role) { F.send(res, 403, { error: 'الحساب ده ما عنده صلاحية على لوحة التحكم' }); return null; }
   const can = p => PERMS[role].includes(p);
   if (need && ![].concat(need).every(can)) { F.send(res, 403, { error: `صلاحيتك (${ROLE_NAME[role]}) ما تسمح بالعملية دي` }); return null; }

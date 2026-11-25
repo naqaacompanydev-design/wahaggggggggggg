@@ -14,12 +14,13 @@ async function token() {
   const now = Math.floor(Date.now() / 1000);
   const head = b64u(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
   const body = b64u(JSON.stringify({ iss: env('FIREBASE_CLIENT_EMAIL'), scope: 'https://www.googleapis.com/auth/cloud-platform', aud: 'https://oauth2.googleapis.com/token', iat: now, exp: now + 3600 }));
-  const key = env('FIREBASE_PRIVATE_KEY').replace(/\\n/g, '\n');
+  const key = env('FIREBASE_PRIVATE_KEY').replace(/,\s*$/, '').replace(/^"|"$/g, '').replace(/\\n/g, '\n').replace(/\r/g, '');
+  if (!/-----BEGIN PRIVATE KEY-----[\s\S]+-----END PRIVATE KEY-----/.test(key)) throw new Error('FIREBASE_PRIVATE_KEY: missing BEGIN/END PRIVATE KEY lines');
   const sig = crypto.sign('RSA-SHA256', Buffer.from(`${head}.${body}`), key).toString('base64url');
   const r = await fetch('https://oauth2.googleapis.com/token', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({ grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer', assertion: `${head}.${body}.${sig}` }) });
   const j = await r.json();
-  if (!r.ok || !j.access_token) throw new Error('firestore auth');
+  if (!r.ok || !j.access_token) throw new Error(`firestore auth: ${j.error || r.status} ${j.error_description || ''}`.trim());
   tok = j.access_token; tokUntil = Date.now() + (j.expires_in - 120) * 1000;
   return tok;
 }

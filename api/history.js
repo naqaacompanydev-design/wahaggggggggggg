@@ -36,5 +36,5 @@ module.exports = async (req, res) => {
     await A.gh(`/git/refs/heads/${encodeURIComponent(branch)}`, { method: 'PATCH', body: { sha: n.sha } });
     await A.log(me.email, 'تراجع عن نشر', c.commit.message.split('\n')[0]);
     return F.send(res, 200, { ok: true, commit: n.sha.slice(0, 7) });
-  } catch { return F.send(res, 502, { error: 'ما قدرنا نكمل، جرّب بعد شوية' }); }
+  } catch (e) { console.error('[api/history]', e.message, e.detail ? JSON.stringify(e.detail).slice(0, 500) : ''); return F.send(res, 502, { error: 'ما قدرنا نكمل، جرّب بعد شوية' }); }
 };

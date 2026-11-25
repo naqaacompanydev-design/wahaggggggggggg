@@ -62,5 +62,5 @@ module.exports = async (req, res) => {
     order.total = Math.max(0, sub - order.off - order.giftUsed);
     await F.commit([{ path: `orders/${order.id}`, data: order, exists: false }]);
     return F.send(res, 200, { ok: true, id: order.id, off: order.off, giftUsed: order.giftUsed, total: order.total });
-  } catch { return F.send(res, 502, { error: 'ما قدرنا نسجل الطلب' }); }
+  } catch (e) { console.error('[api/order]', e.message, e.detail ? JSON.stringify(e.detail).slice(0, 500) : ''); return F.send(res, 502, { error: 'ما قدرنا نسجل الطلب' }); }
 };

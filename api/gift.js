@@ -13,5 +13,5 @@ module.exports = async (req, res) => {
     if (g.expires && F.today() > g.expires) return F.send(res, 404, { error: 'الكارت انتهت صلاحيته.' });
     if (!(g.balance > 0)) return F.send(res, 404, { error: 'رصيد الكارت خلص.' });
     return F.send(res, 200, { ok: true, gift: { code: c, balance: g.balance, to: g.to || '' } });
-  } catch { return F.send(res, 502, { error: 'ما قدرنا نتحقق من الكارت الحين. جرّب بعد شوية.' }); }
+  } catch (e) { console.error('[api/gift]', e.message, e.detail ? JSON.stringify(e.detail).slice(0, 500) : ''); return F.send(res, 502, { error: 'ما قدرنا نتحقق من الكارت الحين. جرّب بعد شوية.' }); }
 };

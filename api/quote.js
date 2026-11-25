@@ -24,5 +24,5 @@ module.exports = async (req, res) => {
     qd.status = action; qd[action === 'accepted' ? 'acceptedAt' : 'rejectedAt'] = new Date().toISOString();
     await F.commit([{ path: `quotes/${id}`, data: qd, updateTime: d.updateTime }]);
     return F.send(res, 200, { ok: true, status: action });
-  } catch { return F.send(res, 502, { error: 'حصل خطأ، جرّب بعد شوية' }); }
+  } catch (e) { console.error('[api/quote]', e.message, e.detail ? JSON.stringify(e.detail).slice(0, 500) : ''); return F.send(res, 502, { error: 'حصل خطأ، جرّب بعد شوية' }); }
 };

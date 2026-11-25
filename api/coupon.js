@@ -11,5 +11,5 @@ module.exports = async (req, res) => {
     const why = F.couponProblem(d && d.data);
     if (why) return F.send(res, 404, { error: `«${c}»: ${why}` });
     return F.send(res, 200, { ok: true, coupon: F.couponPublic({ ...d.data, code: c }) });
-  } catch { return F.send(res, 502, { error: 'ما قدرنا نتحقق من الكود الحين. جرّب بعد شوية.' }); }
+  } catch (e) { console.error('[api/coupon]', e.message, e.detail ? JSON.stringify(e.detail).slice(0, 500) : ''); return F.send(res, 502, { error: 'ما قدرنا نتحقق من الكود الحين. جرّب بعد شوية.' }); }
 };
