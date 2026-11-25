@@ -1,0 +1,48 @@
+<!--meta
+{"out":"quote/index.html",
+ "title":"عرض سعر | وهج لخدمات التنظيف",
+ "description":"عرض سعر من وهج لخدمات التنظيف بالرياض.",
+ "canonical":"https://www.wahjclean.sa/quote/"}
+-->
+<!--head-->
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="/assets/quote.css">
+<script src="/assets/quote.js" defer></script>
+<!--/head-->
+<!--body-->
+<main id="main" class="qp">
+  <!--ICONS-->
+  <div class="wrap">
+    <div class="qp__msg" id="qp-msg">جارٍ تحميل عرض السعر…</div>
+    <article class="qdoc" id="qdoc" hidden>
+      <header class="qdoc__head">
+        <img src="/assets/logo.webp" alt="وهج لخدمات التنظيف" class="qdoc__logo">
+        <div class="qdoc__meta">
+          <h1>عرض سعر</h1>
+          <dl>
+            <div><dt>رقم العرض</dt><dd id="q-no" dir="ltr"></dd></div>
+            <div><dt>التاريخ</dt><dd id="q-date"></dd></div>
+            <div><dt>صالح حتى</dt><dd id="q-valid"></dd></div>
+          </dl>
+        </div>
+      </header>
+      <p class="qdoc__to">مقدّم إلى: <b id="q-to"></b></p>
+      <div class="qdoc__tablewrap">
+        <table class="qdoc__table">
+          <thead><tr><th>البند</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead>
+          <tbody id="q-items"></tbody>
+        </table>
+      </div>
+      <dl class="qdoc__sum" id="q-sum"></dl>
+      <p class="qdoc__notes" id="q-notes" hidden></p>
+      <p class="qdoc__status" id="q-status" hidden></p>
+      <div class="qdoc__act" id="q-act">
+        <button type="button" class="btn btn--primary" id="q-accept"><svg class="ico"><use href="#i-check"/></svg>أوافق على العرض</button>
+        <a class="btn btn--wa" id="q-wa" target="_blank" rel="noopener"><svg class="ico"><use href="#i-wa"/></svg>عندي سؤال</a>
+        <button type="button" class="btn btn--ghost" id="q-print">اطبع أو احفظ PDF</button>
+      </div>
+      <footer class="qdoc__foot">وهج لخدمات التنظيف · الرياض · <span dir="ltr">0550771338</span> · info@wahjclean.sa</footer>
+    </article>
+  </div>
+</main>
+<!--/body-->

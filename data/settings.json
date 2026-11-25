@@ -1,0 +1,20 @@
+{
+ "_note": "الإعدادات العامة للموقع، تتعدل من لوحة التحكم. وقت البناء تتطبق على كل صفحات الموقع.",
+ "phone": "0550771338",
+ "whatsapp": "0550771338",
+ "email": "info@wahjclean.sa",
+ "social": {
+  "snap": "",
+  "ig": "",
+  "tt": "https://www.tiktok.com/@wahaj_clean",
+  "x": "",
+  "yt": ""
+ },
+ "colors": {
+  "primary": "#2C70A8",
+  "secondary": "#96CC8A",
+  "dark": "#1F2540"
+ },
+ "logo": "/assets/logo.webp",
+ "installments": true
+}

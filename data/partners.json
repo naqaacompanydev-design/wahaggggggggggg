@@ -1,4 +1,25 @@
 {
-  "_note": "شعارات شركاء النجاح. فاضية حتى يرسل العميل الشعارات بإذن أصحابها. كل شريك: { \"name\": \"...\", \"logo\": \"/assets/partners/...png\", \"sector\": \"...\", \"url\": \"اختياري\" }",
-  "partners": []
+  "_note": "شعارات شركاء النجاح، تظهر في الشريط المتحرك في الرئيسية وفي صفحة شركاء النجاح. لإضافة شريك: ارفع شعاره في assets/partners/ وأضف سطر هنا. كل شريك: { \"name\": \"...\", \"logo\": \"/assets/partners/...\", \"sector\": \"...\", \"url\": \"اختياري\" }",
+  "partners": [
+    {
+      "name": "الراجحي للبناء والتعمير",
+      "logo": "/assets/partners/alrajhi.webp",
+      "sector": "مقاولات وبناء"
+    },
+    {
+      "name": "كونكريت للتطوير",
+      "logo": "/assets/partners/concrete.webp",
+      "sector": "تطوير عقاري"
+    },
+    {
+      "name": "شركة السفياني لأنظمة الأمن والسلامة",
+      "logo": "/assets/partners/sufyani.webp",
+      "sector": "أنظمة الأمن والسلامة"
+    },
+    {
+      "name": "أركان للتطوير العقاري",
+      "logo": "/assets/partners/arkan.webp",
+      "sector": "تطوير عقاري"
+    }
+  ]
 }

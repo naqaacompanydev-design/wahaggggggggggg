@@ -38,8 +38,11 @@
   <section class="c-body">
     <div class="wrap c-grid">
       <div class="c-main">
+        <div class="g-ribbon" id="g-ribbon" hidden><span class="g-ribbon__ic" aria-hidden="true">🎁</span><p><b>أنت تجهّز طلب إهداء</b><span id="g-ribbon-t">اختر الخدمة اللي تبي تهديها، وفي الآخر تكتب بيانات المُهدى له ورسالة الكارت.</span></p><button type="button" class="g-ribbon__x" data-gift-off>إلغاء الإهداء</button></div>
         <div class="c-step" data-step="1">
-          <h2 class="c-h">وش تبي ننظف؟</h2>
+          <h2 class="c-h" id="c-cats-h">وش تبي ننظف؟</h2>
+          <p class="c-hint" id="c-hint">تقدر تختار أكثر من خدمة، وكلها تنجمع في طلب واحد وسعر واحد.</p>
+          <div id="c-mix" aria-live="polite"></div>
           <div class="cats" id="c-cats"></div>
           <div class="panel" id="c-panel" hidden aria-labelledby="pn-h"></div>
         </div>
@@ -59,17 +62,39 @@
             <button type="button" class="period" role="radio" aria-checked="false" data-period="pm"><svg class="ico"><use href="#i-moon"/></svg><b>مسائي</b><span>من العصر للمساء</span></button>
           </div>
           <p class="c-note" id="c-amnote" hidden>الفترة الصباحية خلصت اليوم. اختر المسائية أو يوم ثاني.</p>
+          <div class="g-later" id="g-later" hidden>
+            <span>هدية مفاجأة وما تعرف وقته؟</span>
+            <button type="button" class="g-later__b" data-gift-later aria-pressed="false"><span aria-hidden="true">🎁</span>خلّ المُهدى له يختار الموعد</button>
+          </div>
         </div>
 
         <div class="c-step" data-step="4" hidden>
           <h2 class="c-h">بياناتك</h2>
+          <div class="gift" id="c-gift">
+            <label class="gift__tg"><input type="checkbox" id="g-on"><span class="gift__sw" aria-hidden="true"></span><span class="gift__t"><b><span aria-hidden="true">🎁</span> هذا الطلب هدية لشخص عزيز</b><small>نرسل له كارت إهداء باسمك، ونجي ننظف عنده بدون ما يدفع شي.</small></span></label>
+            <div class="gift__body" id="g-body" hidden>
+              <div class="form">
+                <label class="field"><span>اسم المُهدى له</span><input id="g-to" type="text" autocomplete="off" placeholder="مثال: أم فهد"><small class="c-err" id="err-gto" hidden>اكتب اسم المُهدى له.</small></label>
+                <label class="field"><span>جوال المُهدى له</span><input id="g-phone" type="tel" dir="ltr" inputmode="tel" autocomplete="off" placeholder="05XXXXXXXX"><small class="c-help">نتواصل معه لتأكيد العنوان والموعد.</small><small class="c-err" id="err-gphone" hidden>اكتب رقم جوال سعودي يبدأ بـ 05، مثال: 0551234567</small></label>
+                <div class="field field--wide"><span>المناسبة</span><div class="qs__o" id="g-occ" role="radiogroup" aria-label="المناسبة"></div></div>
+                <div class="field field--wide"><label for="g-msg">رسالة الكارت</label><textarea id="g-msg" rows="3" maxlength="180" placeholder="اكتب كلمتك للمُهدى له، أو اختر رسالة جاهزة"></textarea><div class="g-ready" id="g-ready"></div></div>
+                <div class="field field--wide"><span>الموعد</span><div class="qs__o" id="g-when" role="radiogroup" aria-label="الموعد"></div></div>
+                <label class="g-hide field--wide"><input type="checkbox" id="g-hide" checked><span>اخفِ السعر عن المُهدى له <small>ما نذكر له المبلغ، ونتواصل معك أنت في الدفع.</small></span></label>
+              </div>
+              <p class="g-addr"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>العنوان اللي تحت هو عنوان المُهدى له، المكان اللي ننظفه.</p>
+            </div>
+          </div>
           <div class="form">
-            <label class="field"><span>الاسم</span><input id="c-name" type="text" autocomplete="name" placeholder="محمد"><small class="c-err" id="err-name" hidden>اكتب اسمك.</small></label>
-            <label class="field"><span>الحي</span><select id="c-district" autocomplete="address-level3"></select><small class="c-err" id="err-district" hidden>اختر الحي.</small></label>
+            <label class="field"><span id="c-name-l">الاسم</span><input id="c-name" type="text" autocomplete="name" placeholder="محمد"><small class="c-err" id="err-name" hidden>اكتب اسمك.</small></label>
+            <div class="field"><label for="c-city">المدينة</label><select id="c-city" autocomplete="address-level2"><option>الرياض</option><option value="أخرى">مدينة أخرى</option></select><input id="c-city-other" type="text" placeholder="اكتب اسم المدينة" aria-label="اسم المدينة" hidden><small class="c-err" id="err-city" hidden>اكتب اسم المدينة.</small></div>
+            <label class="field"><span>الحي</span><input id="c-district" type="text" list="c-dlist" autocomplete="off" placeholder="اكتب حيّك، مثال: الملقا"><datalist id="c-dlist"></datalist><small class="c-err" id="err-district" hidden>اكتب الحي.</small></label>
+            <label class="field"><span>العنوان الوطني المختصر <em>(اختياري)</em></span><input id="c-short" type="text" dir="ltr" maxlength="10" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="RRRD2929"><small class="c-help">تلقاه في تطبيق «سبل»: 4 حروف إنجليزي و4 أرقام.</small><small class="c-err" id="err-short" hidden>العنوان المختصر 4 حروف إنجليزي و4 أرقام، مثال: RRRD2929</small></label>
+            <div class="field"><span>موقعك على الخريطة <em>(اختياري)</em></span><button type="button" class="geo" data-geo><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>أرسل موقعي الحالي</button><small class="c-help" id="c-geo-st" aria-live="polite">يوصلنا رابط موقعك على خرائط جوجل مع الطلب.</small></div>
             <label class="field field--wide"><span>ملاحظات <em>(اختياري)</em></span><textarea id="c-notes" rows="3" placeholder="مثال: الدور الثاني، يوجد مصعد"></textarea></label>
           </div>
           <div class="c-review" id="c-review"></div>
           <p class="sent" id="c-sent" hidden><svg class="ico"><use href="#i-check"/></svg>فتحنا لك واتساب برسالة جاهزة فيها طلبك. اضغط «إرسال» عشان يوصلنا.</p>
+          <div class="g-done" id="g-done" hidden></div>
         </div>
       </div>
 

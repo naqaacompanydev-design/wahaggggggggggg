@@ -59,7 +59,9 @@
   let D;
   try { D = await (await fetch('/data/posts.json', { cache: 'no-store' })).json(); }
   catch { D = { categories: {}, posts: [] }; }
-  const posts = (D.posts || []).sort((a, b) => b.date.localeCompare(a.date));
+  // drafts and posts dated in the future are not shown yet
+  const today = new Date().toISOString().slice(0, 10);
+  const posts = (D.posts || []).filter(p => !p.draft && p.date <= today).sort((a, b) => b.date.localeCompare(a.date));
   const cats = D.categories || {};
   const icons = { tips: 's-spray', home: 's-door', sofa: 's-sofa', ac: 's-ac', pest: 's-bug' };
 

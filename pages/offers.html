@@ -9,18 +9,7 @@
 <link rel="stylesheet" href="/assets/service.css">
 <link rel="stylesheet" href="/assets/calc.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[
- {"@type":"OfferCatalog","name":"عروض وهج لخدمات التنظيف","url":"https://www.wahjclean.sa/offers/","itemListElement":[
-  {"@type":"Offer","name":"غسيل وتجفيف وتعطير طقم كنب 5 أشخاص أو 5 أمتار","price":"99","priceCurrency":"SAR"},
-  {"@type":"Offer","name":"غسيل وتجفيف وتعطير طقم كنب 7 أشخاص أو 7 أمتار","price":"139","priceCurrency":"SAR"},
-  {"@type":"Offer","name":"غسيل وتجفيف وتعطير طقم كنب 10 أشخاص أو 10 أمتار","price":"194","priceCurrency":"SAR"},
-  {"@type":"Offer","name":"غسيل وتجفيف وتعطير طقم كنب 15 شخص أو 15 متر","price":"259","priceCurrency":"SAR"},
-  {"@type":"Offer","name":"غسيل مجلس كامل (4×4 و 4×5)","price":"149","priceCurrency":"SAR"},
-  {"@type":"Offer","name":"غسيل 3 مكيفات","price":"99","priceCurrency":"SAR"}]},
- {"@type":"BreadcrumbList","itemListElement":[
-  {"@type":"ListItem","position":1,"name":"الرئيسية","item":"https://www.wahjclean.sa/"},
-  {"@type":"ListItem","position":2,"name":"العروض","item":"https://www.wahjclean.sa/offers/"}]}
-]}
+{"@context":"https://schema.org","@graph":[{"@type":"OfferCatalog","name":"عروض وهج لخدمات التنظيف","url":"https://www.wahjclean.sa/offers/","itemListElement":[{"@type":"Offer","name":"غسيل وتجفيف وتعطير طقم كنب 5 أشخاص أو 5 أمتار","price":"99","priceCurrency":"SAR"},{"@type":"Offer","name":"غسيل وتجفيف وتعطير طقم كنب 7 أشخاص أو 7 أمتار","price":"139","priceCurrency":"SAR"},{"@type":"Offer","name":"غسيل وتجفيف وتعطير طقم كنب 10 أشخاص أو 10 أمتار","price":"194","priceCurrency":"SAR"},{"@type":"Offer","name":"غسيل وتجفيف وتعطير طقم كنب 15 شخص أو 15 متر","price":"259","priceCurrency":"SAR"},{"@type":"Offer","name":"غسيل مجلس كامل (4×4 و 4×5)","price":"149","priceCurrency":"SAR"},{"@type":"Offer","name":"غسيل 3 مكيفات","price":"99","priceCurrency":"SAR"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"الرئيسية","item":"https://www.wahjclean.sa/"},{"@type":"ListItem","position":2,"name":"العروض","item":"https://www.wahjclean.sa/offers/"}]}]}
 </script>
 <!--/head-->
 <!--body-->
@@ -93,25 +82,22 @@
   </dialog>
 </main>
 <script>
-(() => {
-  const OFFERS = [
-    { s: 'sofa', img: '/assets/old/offer_8f132fc44977d9f9.png', title: 'غسيل وتجفيف وتعطير طقم كنب 5 أشخاص أو 5 أمتار', price: 99, items: ['غسيل وتجفيف وتعطير الكنب', 'غسيل سجادة 6 أمتار مجانًا', 'تنفيض ستارة من الغبار مجانًا'] },
-    { s: 'sofa', img: '/assets/old/offer_054558cf5b855963.jpeg', title: 'غسيل وتجفيف وتعطير طقم كنب 7 أشخاص أو 7 أمتار', price: 139, items: ['غسيل وتجفيف وتعطير الكنب', 'غسيل سجادة 6 أمتار مجانًا', 'تنفيض ستارة من الغبار مجانًا'] },
-    { s: 'sofa', img: '/assets/old/offer_aed2eb2afcd92e7e.jpeg', title: 'غسيل وتجفيف وتعطير طقم كنب 10 أشخاص أو 10 أمتار', price: 194, items: ['غسيل وتجفيف وتعطير الكنب', 'غسيل سجادة 10 أمتار مجانًا', 'تنفيض ستارة من الغبار مجانًا'] },
-    { s: 'sofa', img: '/assets/old/offer_67744ea4aa27da7c.jpeg', title: 'غسيل وتجفيف وتعطير طقم كنب 15 شخص أو 15 متر', price: 259, items: ['غسيل وتجفيف وتعطير الكنب', 'غسيل سجادة 10 أمتار مجانًا', 'تنفيض ستارة من الغبار مجانًا'] },
-    { s: 'sofa', img: '/assets/old/offer_c67f2f63f0f236f3.jpeg', title: 'غسيل مجلس كامل (4×4 و 4×5)', price: 149, items: ['يشمل السجاد والستائر والمساند والمراكي', 'المجلس الثاني بـ 119 ريال فقط'] },
-    { s: 'ac', img: '/assets/old/offer_2a96c521c1578e06.jpeg', title: 'غسيل 3 مكيفات', price: 99, items: ['تنظيف الفلاتر والوحدات', 'تعقيم لتحسين جودة الهواء'] }
-  ];
+(async () => {
+  // offers from data/offers.json (edited in the admin); hidden or expired offers are skipped
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const price = o => `${esc(o.price)} <small>ريال</small>${o.oldPrice ? ` <s class="price__old">${esc(o.oldPrice)}</s>` : ''}`;
+  let OFFERS = [];
+  try { OFFERS = ((await (await fetch('/data/offers.json', { cache: 'no-store' })).json()).offers || []).filter(o => !o.hidden && (!o.until || o.until >= new Date().toISOString().slice(0, 10))); } catch {}
   const grid = document.getElementById('of-grid');
   grid.innerHTML = OFFERS.map((o, i) => `
-    <article class="offer" data-s="${o.s}">
-      <button class="offer__img" type="button" data-offer="${i}" aria-label="مشاهدة تفاصيل: ${o.title}"><img src="${o.img}" alt="${o.title}" loading="lazy"><span class="offer__badge">عرض مميز</span></button>
+    <article class="offer" data-s="${esc(o.s)}">
+      <button class="offer__img" type="button" data-offer="${i}" aria-label="مشاهدة تفاصيل: ${esc(o.title)}"><img src="${esc(o.img)}" alt="${esc(o.title)}" loading="lazy"><span class="offer__badge">عرض مميز</span></button>
       <div class="offer__body">
-        <h3>${o.title}</h3>
-        <ul class="of-items">${o.items.map(t => `<li><svg class="ico"><use href="#i-check"/></svg>${t}</li>`).join('')}</ul>
-        <div class="offer__row"><div class="price">${o.price} <small>ريال</small></div><button class="btn btn--primary btn--sm" type="button" data-offer="${i}">مشاهدة العرض</button></div>
+        <h3>${esc(o.title)}</h3>
+        <ul class="of-items">${(o.items || []).map(t => `<li><svg class="ico"><use href="#i-check"/></svg>${esc(t)}</li>`).join('')}</ul>
+        <div class="offer__row"><div class="price">${price(o)}</div><button class="btn btn--primary btn--sm" type="button" data-offer="${i}">مشاهدة العرض</button></div>
       </div>
-    </article>`).join('');
+    </article>`).join('') || '<p class="fq-count">ما فيه عروض حاليًا. تابعنا، العروض تتجدد باستمرار.</p>';
 
   const chips = document.getElementById('of-chips');
   chips.addEventListener('click', e => {
@@ -127,8 +113,8 @@
       const o = OFFERS[+b.dataset.offer];
       document.getElementById('dlg-img').src = o.img; document.getElementById('dlg-img').alt = o.title;
       document.getElementById('dlg-h').textContent = o.title;
-      document.getElementById('dlg-price').innerHTML = `${o.price} <small>ريال</small>`;
-      document.getElementById('dlg-list').innerHTML = o.items.map(t => `<li><svg class="ico"><use href="#i-check"/></svg>${t}</li>`).join('');
+      document.getElementById('dlg-price').innerHTML = price(o);
+      document.getElementById('dlg-list').innerHTML = (o.items || []).map(t => `<li><svg class="ico"><use href="#i-check"/></svg>${esc(t)}</li>`).join('');
       document.getElementById('dlg-wa').href = `https://wa.me/966550771338?text=${encodeURIComponent('السلام عليكم، أبغى أطلب عرض: ' + o.title + ' (' + o.price + ' ريال)')}`;
       document.getElementById('dlg-calc').href = `/price-calculator/?s=${o.s}`;
       dlg.showModal();
