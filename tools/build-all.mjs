@@ -10,13 +10,13 @@ const SITE = 'https://www.wahjclean.sa';
 const run = f => execFileSync(process.execPath, [path.join(root, 'tools', f)], { stdio: 'inherit', cwd: root });
 
 // 1) generate page sources, 2) build them with the shared header/footer
-for (const f of ['services.mjs', 'faq.mjs', 'legal.mjs', 'build.mjs']) run(f);
+for (const f of ['services.mjs', 'faq.mjs', 'legal.mjs', 'data-pages.mjs', 'build.mjs']) run(f);
 
 // 3) export only what the site serves
 const dist = path.join(root, 'dist');
 fs.rmSync(dist, { recursive: true, force: true });
 const SKIP = new Set(['dist', 'pages', 'tools', 'shots', '.taste-skill', '.claude', '.git', 'node_modules',
-  'README.md', 'vercel.json', '.gitignore', 'package.json', 'credits.json', 'deliver']);
+  'README.md', 'README-site.txt', 'README-admin.txt', 'vercel.json', 'api', '_edit', 'firestore.rules', '.gitignore', 'package.json', 'credits.json', 'deliver', 'preview']);
 const copy = (from, to) => {
   for (const d of fs.readdirSync(from, { withFileTypes: true })) {
     if (SKIP.has(d.name) || d.name.endsWith('.zip')) continue;
@@ -27,6 +27,11 @@ const copy = (from, to) => {
 };
 fs.mkdirSync(dist);
 copy(root, dist);
+
+// 3b) apply the client's edits from the admin (data/content.json) and write the editable copies (dist/_edit/)
+execFileSync(process.execPath, [path.join(root, 'tools', 'content.mjs'), dist], { stdio: 'inherit', cwd: root });
+// 3c) general settings from the admin (numbers, email, social links, colours, logo, installments)
+execFileSync(process.execPath, [path.join(root, 'tools', 'settings.mjs'), dist], { stdio: 'inherit', cwd: root });
 
 // 4) sitemap.xml from every indexable page in dist
 const pages = [];

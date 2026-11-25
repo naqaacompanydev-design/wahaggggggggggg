@@ -39,7 +39,7 @@ for (const file of walk(path.join(root, 'pages'))) {
 
   // cache-bust shared files so phones always load the latest design
   const v = Date.now().toString(36);
-  top = top.replace(/(\/assets\/(?:site|service|calc)\.(?:css|js))(\?v=\w+)?"/g, `$1?v=${v}"`);
+  top = top.replace(/(\/assets\/(?:site|service|calc|gift|quote)\.(?:css|js))(\?v=\w+)?"/g, `$1?v=${v}"`);
   const out = path.join(root, meta.out);
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, `${top}<!--page-->\n${body.trim()}\n<!--/page-->${after}`);
