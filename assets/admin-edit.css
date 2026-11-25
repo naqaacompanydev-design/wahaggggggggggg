@@ -1,0 +1,10 @@
+/* inside the admin's page editor only */
+we-t{display:inline;border-radius:4px;cursor:text;transition:box-shadow .15s,background .15s}
+we-t:hover{box-shadow:0 0 0 2px rgba(44,112,168,.55);background:rgba(44,112,168,.08)}
+we-t.we-on{box-shadow:0 0 0 2px #2C70A8;background:rgba(255,255,255,.92);color:#1F2540!important;-webkit-text-fill-color:#1F2540;outline:none}
+we-t.we-changed:not(.we-on){box-shadow:0 0 0 2px rgba(217,87,122,.7)}
+img.we-i{cursor:pointer;transition:outline-color .15s}
+img.we-i:hover{outline:3px solid #2C70A8;outline-offset:-3px}
+img.we-i.we-changed{outline:3px solid #D9577A;outline-offset:-3px}
+/* keep the page still while editing: entrance and loop animations jump to their end */
+*,*::before,*::after{animation-duration:.001s!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-delay:0s!important}

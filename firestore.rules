@@ -1,0 +1,45 @@
+rules_version = '2';
+// Wahaj — Firestore security rules.
+// Paste into: Firebase console > Firestore Database > Rules, then «Publish».
+//
+// 1) Put the owners' emails below, in lowercase — the same as ADMIN_EMAILS in Vercel.
+// 2) Everyone else is added from the admin («المستخدمين») with a role: admin, editor or sales.
+// Visitors never touch the database directly: the site goes through /api/* on Vercel (service account).
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null && request.auth.token.email != null; }
+    function isOwner() {
+      return signedIn() && request.auth.token.email.lower() in [
+        'almohandescompany12@gmail.com'
+      ];
+    }
+    function member() { return get(/databases/$(database)/documents/users/$(request.auth.token.email.lower())).data; }
+    function hasRole(roles) {
+      return isOwner() || (signedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.token.email.lower()))
+        && member().active != false && member().role in roles);
+    }
+
+    // sales records: coupons, gift cards, quotes (and their number counter), orders
+    match /coupons/{id}   { allow read, write: if hasRole(['admin', 'sales']); }
+    match /giftcards/{id} { allow read, write: if hasRole(['admin', 'sales']); }
+    match /quotes/{id}    { allow read, write: if hasRole(['admin', 'sales']); }
+    match /counters/{id}  { allow read, write: if hasRole(['admin', 'sales']); }
+    match /orders/{id}    { allow read, write: if hasRole(['admin', 'sales']); }
+
+    // accounts: changed only through /api/users; people can read their own entry
+    match /users/{email} {
+      allow read: if hasRole(['admin']) || (signedIn() && request.auth.token.email.lower() == email);
+      allow write: if false;
+    }
+
+    // activity log: anyone with access adds their own lines; admins read it; nobody edits it
+    match /log/{id} {
+      allow create: if hasRole(['admin', 'editor', 'sales']) && request.resource.data.email == request.auth.token.email.lower();
+      allow read: if hasRole(['admin']);
+      allow update, delete: if false;
+    }
+
+    match /{document=**} { allow read, write: if false; }
+  }
+}
