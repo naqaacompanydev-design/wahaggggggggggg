@@ -1,9 +1,31 @@
 // Shared server helpers (files starting with "_" are not public endpoints on Vercel).
 // Firestore through its REST API with the service account from the Vercel settings — no extra packages.
-// Needs: FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY.
+// Needs either FIREBASE_SERVICE_ACCOUNT (the whole service-account .json file pasted as it is — easiest),
+// or the three separate values FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY.
 const crypto = require('crypto');
 
-const env = k => (process.env[k] || '').trim();
+let sa, saNote = '';
+function serviceAccount() {
+  if (sa !== undefined) return sa;
+  const raw = (process.env.FIREBASE_SERVICE_ACCOUNT || '').trim();
+  saNote = !raw ? 'FIREBASE_SERVICE_ACCOUNT is not set' : '';
+  if (raw) {
+    // tolerate the file pasted with quotes around it, or with real line breaks inside the key
+    const text = raw.replace(/^'|'$/g, '').replace(/^"(\{[\s\S]*\})"$/, '$1');
+    try {
+      const j = JSON.parse(text);
+      sa = j && j.private_key && j.client_email ? j : null;
+      if (!sa) saNote = `FIREBASE_SERVICE_ACCOUNT is JSON but has no ${j && j.private_key ? 'client_email' : 'private_key'} (length ${raw.length})`;
+    } catch (e) {
+      try { const j = JSON.parse(text.replace(/\r?\n/g, '\\n').replace(/\{\\n/g, '{').replace(/,\\n\s*"/g, ',"').replace(/\\n\}/g, '}')); sa = j && j.private_key ? j : null; } catch { sa = null; }
+      if (!sa) saNote = `FIREBASE_SERVICE_ACCOUNT is not valid JSON (length ${raw.length}, starts with "${raw.slice(0, 1)}", ends with "${raw.slice(-1)}")`;
+    }
+  }
+  if (sa) saNote = 'ok';
+  return sa;
+}
+const FROM_FILE = { FIREBASE_PROJECT_ID: 'project_id', FIREBASE_CLIENT_EMAIL: 'client_email', FIREBASE_PRIVATE_KEY: 'private_key' };
+const env = k => { const s = FROM_FILE[k] && serviceAccount(); return String((s && s[FROM_FILE[k]]) || process.env[k] || '').trim(); };
 const ready = () => !!(env('FIREBASE_PROJECT_ID') && env('FIREBASE_CLIENT_EMAIL') && env('FIREBASE_PRIVATE_KEY'));
 
 // ---------- access token for the service account ----------
@@ -15,7 +37,7 @@ async function token() {
   const head = b64u(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
   const body = b64u(JSON.stringify({ iss: env('FIREBASE_CLIENT_EMAIL'), scope: 'https://www.googleapis.com/auth/cloud-platform', aud: 'https://oauth2.googleapis.com/token', iat: now, exp: now + 3600 }));
   const key = env('FIREBASE_PRIVATE_KEY').replace(/,\s*$/, '').replace(/^"|"$/g, '').replace(/\\n/g, '\n').replace(/\r/g, '');
-  if (!/-----BEGIN PRIVATE KEY-----[\s\S]+-----END PRIVATE KEY-----/.test(key)) throw new Error('FIREBASE_PRIVATE_KEY: missing BEGIN/END PRIVATE KEY lines');
+  if (!/-----BEGIN PRIVATE KEY-----[\s\S]+-----END PRIVATE KEY-----/.test(key)) { serviceAccount(); throw new Error(`no usable key: ${saNote}; FIREBASE_PRIVATE_KEY has no BEGIN/END lines`); }
   const sig = crypto.sign('RSA-SHA256', Buffer.from(`${head}.${body}`), key).toString('base64url');
   const r = await fetch('https://oauth2.googleapis.com/token', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({ grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer', assertion: `${head}.${body}.${sig}` }) });
